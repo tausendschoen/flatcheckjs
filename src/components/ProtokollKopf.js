@@ -6,7 +6,6 @@ import Paper from '@mui/material/Paper';
 
 export default function ProtokollKopf() {
     return (
-        <React.Fragment>
             <Paper sx={{
                 p: 2,
                 display: 'flex',
@@ -40,6 +39,7 @@ export default function ProtokollKopf() {
                         variant="standard"
                     />
                 </Grid>
+
                 <Grid item xs={12}>
                     <TextField
                         required
@@ -72,6 +72,5 @@ export default function ProtokollKopf() {
 
             </Grid>
             </Paper>
-        </React.Fragment>
     );
 }
