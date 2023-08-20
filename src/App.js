@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 import ProtokollKopf from "./components/ProtokollKopf";
 import Signature from "./components/Signature";
 import {Fragment} from "react";
-import Zimmer from "./components/Zimmer";
+import ZimmerListe from "./components/ZimmerListe";
 
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
                 <Schluessel/>
             </Box>
             <Box sx={{p: 1}}>
-                <Zimmer/>
+                <ZimmerListe/>
             </Box>
             <Box sx={{p: 1}}>
                 <Signature/>
