@@ -1,5 +1,5 @@
 import {Autocomplete, Rating} from "@mui/material";
-import {Delete, Favorite, FiberManualRecord, Star} from "@mui/icons-material";
+import {Assignment, Delete, Favorite, FiberManualRecord, Star} from "@mui/icons-material";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import * as React from "react";
@@ -47,7 +47,7 @@ export default function Inventar(props) {
 
     return (<>
         <Grid container spacing={2} paddingTop={1} paddingBottom={2}>
-            <Grid item xs={1}> <Delete/></Grid>
+            <Grid item xs={1}> <Assignment/></Grid>
             <Grid iten xs={7}>
                 <TextField fullWidth={true} disabled={disabled}
                            onChange={(event, newValue) => {
@@ -69,7 +69,7 @@ export default function Inventar(props) {
                         console.log("onChange " + newValue);
                         setValue(newValue)
                     }}
-                    emptyIcon={<Star style={{opacity: 0.55}} fontSize="inherit"/>}
+                    emptyIcon={<FiberManualRecord fontSize="inherit" />}
                 />
             </Grid>
             <Grid item xs={2} width={"100%"}>
