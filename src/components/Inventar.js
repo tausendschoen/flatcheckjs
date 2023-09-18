@@ -1,5 +1,5 @@
-import {Autocomplete, Rating} from "@mui/material";
-import {Assignment, Delete, Favorite, FiberManualRecord, Star} from "@mui/icons-material";
+import {Rating} from "@mui/material";
+import {Assignment, FiberManualRecord} from "@mui/icons-material";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import * as React from "react";
@@ -43,7 +43,6 @@ export default function Inventar(props) {
     }
 
     let disabled = props.label !== "";
-    console.log("Label: <" + props.label + ">");
 
     return (<>
         <Grid container spacing={2} paddingTop={1} paddingBottom={2}>

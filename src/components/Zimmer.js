@@ -13,9 +13,10 @@ import {
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Inventar from "./Inventar";
-import {AddCircle, ExpandLess, ExpandMore, Gradient} from "@mui/icons-material";
+import { ExpandLess, ExpandMore, Gradient} from "@mui/icons-material";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
 
 
 export const Inventar_Zimmer = ["Tür", "Türzarge", "Wand", "Boden", "Fußleisten", "Decke", "Steckdosen", "Schalter", "Heizung",
@@ -43,11 +44,12 @@ export default function Zimmer(props) {
 
     const [inventar, setInventar] = React.useState([]);
     // Darstellung des InventarDialogs
-    const [open, setOpen] = React.useState(false);
+    //const [collapsed, setCollapsed] = React.useState(props.open);
+
     // define variable for the card Actionbutton
     let iconButton;
     // initialize the variable with the current state
-    handleClick(open);
+    //handleClick(collapsed);
 
     let inventarListe = props.inventarListe;
     let sonstiges = props.sonstiges;
@@ -64,23 +66,24 @@ export default function Zimmer(props) {
     }
 
     function setInventarValue(id, label, value) {
-        console.log("setInventarValue " + id + " " + "label" + value);
+        console.log("setInventarValue " + id + " " + "label " + value);
         let localList = [...inventar];
         localList[id] = {label: label, value: value};
         localList[id] = {label, value};
         setInventar(localList);
     }
 
-    console.log("Zimmer: >");
+    //console.log("Zimmer: " + props.name + " open " + collapsed);
 
-    let cardContent = "";
-    if (open === true)
-        cardContent =
-            <CardContent>
-                <Grid container spacing={3} paddingTop={1} paddingLeft={1} paddingBottom={2}>
+
+    return (
+        <>
+        <Divider className="page-break"/>
+            <Grid container spacing={3} paddingTop={1} paddingLeft={1} paddingBottom={2}>
+                <Grid item xs={12}> <Typography variant="h6">{props.name}</Typography></Grid>
                 <Grid item xs={6}>
                     <TextField id="heizungszähler" label="Heizungszähler" required={true}
-                               fullWidth={true} type="number"
+                               fullWidth={true} type="text"
                                InputLabelProps={{
                                    shrink: true,
                                }}
@@ -94,7 +97,7 @@ export default function Zimmer(props) {
                     />
                 </Grid>
                 <Grid item xs={6}>
-                    <FormGroup><FormControlLabel control={<Switch defaultChecked/>}
+                    <FormGroup><FormControlLabel control={<Switch />}
                                                  label="Schlüssel"/></FormGroup>
                 </Grid>
             </Grid>
@@ -110,34 +113,8 @@ export default function Zimmer(props) {
             <Box sx={{m: 1}}>
                 <TextField fullWidth multiline rows={3} label="Zusatzinformationen"></TextField>
             </Box>
-            </CardContent>;
+        </>
 
+    );
 
-
-    function handleClick(openState = true) {
-        if( open !== openState )
-            setOpen(!open);
-
-        if( open )
-            iconButton  = <ExpandLess fontSize={"large"}/>
-        else
-            iconButton =  <ExpandMore fontSize={"large"}/>
-    }
-
-    return (
-            <>
-                <Card variant="outlined" sx={{m: 1}}>
-                    <CardHeader
-                        action={
-                            <IconButton aria-label="Hinzufügen" onClick={handleClick}>
-                                {iconButton}
-                            </IconButton>
-                        }
-                        title={props.name}
-                        subheader="Aufnahme des Zustands des Raumes und des Inventars"
-                    />
-                    {cardContent}
-                </Card>
-            </>)
-    ;
 }

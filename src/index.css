@@ -11,3 +11,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@media print {
+   .page-break {
+      margin-top: 2rem;
+      display: block;
+      page-break-before: always;
+
+
+  }
+}
+
+

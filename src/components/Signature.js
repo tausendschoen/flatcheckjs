@@ -4,8 +4,6 @@ import React, {useRef, useState} from "react";
 import SignatureCanvas from 'react-signature-canvas'
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
-import TextField from "@mui/material/TextField";
-
 
 export default function Signature() {
 
