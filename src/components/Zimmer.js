@@ -80,7 +80,7 @@ export default function Zimmer(props) {
         return (
             <>
                 <Divider className="page-break"/>
-                <Grid container spacing={3} paddingTop={1} paddingLeft={1} paddingBottom={2}>
+                <Grid container spacing={3} paddingTop={1} paddingLeft={1} paddingBottom={2} alignItems="center">
                     <Grid item xs={11}> <Typography variant="h6">{props.name}</Typography></Grid>
                     <Grid item xs={1}>
                         <IconButton color="primary" onClick={handleClick}><VisibilityOff/></IconButton>

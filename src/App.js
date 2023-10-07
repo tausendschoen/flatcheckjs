@@ -14,18 +14,11 @@ import {PrintOutlined} from "@mui/icons-material";
 
 export function PrintApp() {
 
-
     const componentRef = useRef();
-    // Darstellung des InventarDialogs
-    const [open, setOpen] = useState(true);
-    const [status, setStatus] = useState('');
-
-    console.log("PrintApp "+ open + " " + status );
-
 
     return (
         <div>
-            <App ref={componentRef} open={open}/>
+            <App ref={componentRef} />
 
             <ReactToPrint content={() => componentRef.current }
 

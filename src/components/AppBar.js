@@ -7,8 +7,6 @@ import Typography from '@mui/material/Typography';
 
 export default function ButtonAppBar(props) {
 
-    const printAction = props.printAction;
-
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
