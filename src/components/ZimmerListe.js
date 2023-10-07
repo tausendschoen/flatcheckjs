@@ -17,7 +17,6 @@ export default function ZimmerListe(props) {
                <Zimmer name="Gäste-WC" sonstiges={3} inventarListe={Inventar_Gäste_WC} open={props.open}/>
                <Zimmer name="Abstellraum" sonstiges={3} inventarListe={Inventar_Gäste_WC} open={props.open}/>
                <Zimmer name="Keller" sonstiges={3} inventarListe={Inventar_Keller}  open={props.open}/>
-
            </>
     );
 }

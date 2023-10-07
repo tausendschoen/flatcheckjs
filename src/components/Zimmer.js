@@ -1,19 +1,10 @@
 import * as React from "react";
 
-import {
-    Card,
-    CardContent,
-    CardHeader,
-    Divider,
-    FormControlLabel,
-    FormGroup,
-    InputAdornment,
-    Switch
-} from "@mui/material";
+import {Divider, FormControlLabel, FormGroup, InputAdornment, Switch} from "@mui/material";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Inventar from "./Inventar";
-import { ExpandLess, ExpandMore, Gradient} from "@mui/icons-material";
+import {Delete, Gradient, Visibility, VisibilityOff} from "@mui/icons-material";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
@@ -44,12 +35,7 @@ export default function Zimmer(props) {
 
     const [inventar, setInventar] = React.useState([]);
     // Darstellung des InventarDialogs
-    //const [collapsed, setCollapsed] = React.useState(props.open);
-
-    // define variable for the card Actionbutton
-    let iconButton;
-    // initialize the variable with the current state
-    //handleClick(collapsed);
+    const [open, setOpen] = React.useState(true);
 
     let inventarListe = props.inventarListe;
     let sonstiges = props.sonstiges;
@@ -73,48 +59,66 @@ export default function Zimmer(props) {
         setInventar(localList);
     }
 
-    //console.log("Zimmer: " + props.name + " open " + collapsed);
+    function handleClick(e) {
+        setOpen(!open);
+    }
 
-
-    return (
-        <>
-        <Divider className="page-break"/>
-            <Grid container spacing={3} paddingTop={1} paddingLeft={1} paddingBottom={2}>
-                <Grid item xs={12}> <Typography variant="h6">{props.name}</Typography></Grid>
-                <Grid item xs={6}>
-                    <TextField id="heizungszähler" label="Heizungszähler" required={true}
-                               fullWidth={true} type="text"
-                               InputLabelProps={{
-                                   shrink: true,
-                               }}
-                               InputProps={{
-                                   startAdornment: (
-                                       <InputAdornment position="start">
-                                           <Gradient/>
-                                       </InputAdornment>
-                                   ),
-                               }}
-                    />
+    console.log("Zimmer: " + props.name + " open " + open);
+    if (open === false)
+        return (
+            <>
+                <Divider/>
+                <Grid container spacing={3} paddingTop={1} paddingLeft={1} paddingBottom={2}>
+                    <Grid item xs={11}> <Typography variant="h6">{props.name}</Typography></Grid>
+                    <Grid item xs={1}>
+                        <IconButton color="primary" onClick={handleClick}><Visibility/></IconButton>
+                    </Grid>
                 </Grid>
-                <Grid item xs={6}>
-                    <FormGroup><FormControlLabel control={<Switch />}
-                                                 label="Schlüssel"/></FormGroup>
+            </>
+        )
+    else
+        return (
+            <>
+                <Divider className="page-break"/>
+                <Grid container spacing={3} paddingTop={1} paddingLeft={1} paddingBottom={2}>
+                    <Grid item xs={11}> <Typography variant="h6">{props.name}</Typography></Grid>
+                    <Grid item xs={1}>
+                        <IconButton color="primary" onClick={handleClick}><VisibilityOff/></IconButton>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <TextField id="heizungszähler" label="Heizungszähler" required={true}
+                                   fullWidth={true} type="text"
+                                   InputLabelProps={{
+                                       shrink: true,
+                                   }}
+                                   InputProps={{
+                                       startAdornment: (
+                                           <InputAdornment position="start">
+                                               <Gradient/>
+                                           </InputAdornment>
+                                       ),
+                                   }}
+                        />
+                    </Grid>
+                    <Grid item xs={6}>
+                        <FormGroup><FormControlLabel control={<Switch/>}
+                                                     label="Schlüssel"/></FormGroup>
+                    </Grid>
                 </Grid>
-            </Grid>
-            <Box sx={{p: "2"}}>
-                {inventar.map((element, index) => {
-                    return (
-                        <Inventar id={index} label={element.label} set={setInventarValue}/>
-                    )
-                })
-                }
-            </Box>
-            <Divider/>
-            <Box sx={{m: 1}}>
-                <TextField fullWidth multiline rows={3} label="Zusatzinformationen"></TextField>
-            </Box>
-        </>
+                <Box sx={{p: "2"}}>
+                    {inventar.map((element, index) => {
+                        return (
+                            <Inventar id={index} label={element.label} set={setInventarValue}/>
+                        )
+                    })
+                    }
+                </Box>
+                <Divider/>
+                <Box sx={{m: 1}}>
+                    <TextField fullWidth multiline rows={3} label="Zusatzinformationen"></TextField>
+                </Box>
+            </>
 
-    );
+        );
 
 }

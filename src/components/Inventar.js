@@ -7,10 +7,8 @@ import Grid from "@mui/material/Grid";
 
 
 const labels = {
-    1: 'defekt', 2: 'start gebraucht', 3: 'gebraucht', 4: 'neuwertig', 5: 'neu',
+    1: 'defekt', 2: 'stark gebraucht', 3: 'gebraucht', 4: 'neuwertig', 5: 'neu',
 };
-
-
 
 /**
  * Eine Inventar eines ZimmerListe. Ein Inventar ist z.B. eine Tür oder eine Steckdose.
@@ -19,7 +17,7 @@ const labels = {
  *
  * @param {Object} props - Property object
  * @param {id} props.id - id des Inventares aus der Inventarliste
- * @param {id} props.label - id des Inventares aus der Inventarliste
+ * @param {id} props.label - der Name des Inventares aus der Inventarliste
  * @param {id} props.value - Gebrauchtstatus des Inventars
  * @param {id} props.set - Funktion zum setzen eines neuen Wertes set(<id>,<wert>)
  * @return {JSX.Element}
@@ -27,53 +25,61 @@ const labels = {
  */
 export default function Inventar(props) {
 
-    // TODO lokalen state nutzen für den Label
-    // TODO Wenn der Namen oder die Zimmer geändert wird, dann muss das persistiert werden
 
-    //const [value, setValue] = React.useState(2);
     const [value, setValue] = React.useState(0);
-
-
-    function getLabelText(value) {
-        return `${value} Star${value !== 1 ? 's' : ''}, ${labels[value]}`;
-    }
 
     function newLabel( label ) {
         props.set( props.id, label, props.value);
     }
 
-    let disabled = props.label !== "";
+    function getLabelText()  {
+        let retValue = "";
+        if( labels[value] )
+            retValue = props.label + " (" + labels[value] + ")";
+        else
+            retValue = props.label ;
+
+        console.log(retValue);
+        return retValue;
+    }
+
+    // wenn das Textfeld keinen Wert hat, dann kann dieser eingegeben werden. Ansonsten ist
+    // der Wert/ Name des Textfeldes fest definiert
+    let readonly = props.label !== "";
+
+    console.log("redraw");
 
     return (<>
-        <Grid container spacing={2} paddingTop={1} paddingBottom={2}>
-            <Grid item xs={1}> <Assignment/></Grid>
-            <Grid iten xs={7}>
-                <TextField fullWidth={true} disabled={disabled}
+        <Grid container spacing={2} paddingTop={1} paddingBottom={2} >
+            <Grid item xs={1}><Assignment /></Grid>
+            <Grid iten xs={8}>
+                <TextField fullWidth={true}
+                           sx={{paddingTop: 1}}
+                           InputProps={{
+                               readOnly: readonly,
+                           }}
                            onChange={(event, newValue) => {
                                newLabel(newValue);
                            }}
-                           label={props.label} variant="standard" />
+                           value={getLabelText()}
+                           variant="standard" />
             </Grid>
-            <Grid  item xs={2}  >
+            <Grid  item xs={3}  >
                 <Rating
-
                     name="hover-feedback"
                     value={value}
                     precision={1}
                     defaultValue={0}
-                    getLabelText={getLabelText}
+
                     icon={<FiberManualRecord fontSize="inherit" />}
 
                     onChange={(event, newValue) => {
-                        console.log("onChange " + newValue);
                         setValue(newValue)
                     }}
                     emptyIcon={<FiberManualRecord fontSize="inherit" />}
                 />
             </Grid>
-            <Grid item xs={2} width={"100%"}>
-                <Box sx={{ textAlign: 'left', width: "100%" }} >{labels[value]}</Box>
-            </Grid>
+
         </Grid>
 
     </>);

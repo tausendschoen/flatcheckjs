@@ -4,63 +4,28 @@ import React, {useRef, useState} from "react";
 import SignatureCanvas from 'react-signature-canvas'
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
+import IconButton from "@mui/material/IconButton";
+import {DeleteOutline} from "@mui/icons-material";
+import SignatureBox from "./SignatureBox";
+
+function DeleteIcon() {
+    return null;
+}
 
 export default function Signature() {
 
-    const sigRef = useRef( );
-    const [signature, setSignature ] = useState(null);
 
-    const handleSignatureEnd = () => {
-        setSignature(sigRef.current.toDataURL());
-    }
-    const clearSignature = () => {
-        sigRef.current.clear();
-        setSignature(null);
-    }
+    return (
 
-    return(
-
-            <Grid container spacing={3}>
-                <Grid item xs={12} sm={6}>
-                    <Paper sx={{
-                        p: 2,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        maxWidth: "100%",
-                        elevation: "2",
-                    }}>
-                    <Typography variant="body1" gutterBottom>
-                        Unterschrift Mieter
-                    </Typography>
-                    <SignatureCanvas
-                        penColor="green"
-                        canvasProps={{className: 'signature'}}
-                        ref={sigRef}
-                        onEnd={handleSignatureEnd}
-                    />
-                    </Paper>
-                </Grid>
-
-                <Grid item xs={12} sm={6}>
-                    <Paper sx={{
-                        p: 2,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        maxWidth: "100%",
-                        elevation: "2",
-                    }}>
-                    <Typography variant="body1" gutterBottom>
-                        Unterschrift Vermieter
-                    </Typography>
-                    <SignatureCanvas
-                        penColor="green"
-                        canvasProps={{className: 'signature'}}
-                        ref={sigRef}
-                        onEnd={handleSignatureEnd}
-                    />
-                    </Paper>
-                </Grid>
+        <Grid container spacing={3} >
+            <Grid item xs={12} sm={6} width="100%" >
+                   <SignatureBox title="Unterschrift Mieter" />
             </Grid>
+
+            <Grid item xs={12} sm={6}>
+                    <SignatureBox title="Unterschrift Vermieter" />
+            </Grid>
+        </Grid>
 
     )
 };
