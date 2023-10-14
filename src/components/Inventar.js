@@ -1,14 +1,20 @@
-import {Rating} from "@mui/material";
+import {makeStyles, Rating} from "@mui/material";
 import {Assignment, FiberManualRecord} from "@mui/icons-material";
 import TextField from "@mui/material/TextField";
-import Box from "@mui/material/Box";
 import * as React from "react";
 import Grid from "@mui/material/Grid";
+import { styled } from '@mui/system';
 
 
 const labels = {
     1: 'defekt', 2: 'stark gebraucht', 3: 'gebraucht', 4: 'neuwertig', 5: 'neu',
 };
+
+const CustomRating = styled(Rating)({
+    '& .MuiRating-iconFilled': {
+        color: 'gold', // Ändere hier die gewünschte Farbe
+    },
+})
 
 /**
  * Eine Inventar eines ZimmerListe. Ein Inventar ist z.B. eine Tür oder eine Steckdose.
@@ -25,8 +31,9 @@ const labels = {
  */
 export default function Inventar(props) {
 
-
     const [value, setValue] = React.useState(0);
+    const [ratingColor, setRatingColor] = React.useState("grey");
+    let icon = <FiberManualRecord color="white"  fontSize="inherit" />;
 
     function newLabel( label ) {
         props.set( props.id, label, props.value);
@@ -39,8 +46,34 @@ export default function Inventar(props) {
         else
             retValue = props.label ;
 
-        console.log(retValue);
         return retValue;
+    }
+
+
+
+    function handleMouseMove(event, newValue) {
+        switch( newValue ) {
+            case 1 :
+                setRatingColor("orange");
+                break;
+            case 2 :
+                setRatingColor("yellow");
+                break;
+            case 3 :
+                setRatingColor("grey");
+                break;
+            case 4 :
+                setRatingColor("green");
+                break;
+            case 5 :
+                setRatingColor("green");
+                break;
+
+            default:
+                setRatingColor("grey");
+        }
+        icon = <FiberManualRecord style={{color: ratingColor}}  fontSize="inherit" />;
+        console.log("log " + newValue +  " " + icon);
     }
 
     // wenn das Textfeld keinen Wert hat, dann kann dieser eingegeben werden. Ansonsten ist
@@ -50,13 +83,13 @@ export default function Inventar(props) {
     console.log("redraw");
 
     return (<>
-        <Grid container spacing={2} paddingTop={1} paddingBottom={2} >
-            <Grid item xs={1}><Assignment /></Grid>
-            <Grid iten xs={8}>
+        <Grid container spacing={1} padding={1} width={"100%"}>
+            <Grid iten xs={12} sm={9}>
                 <TextField fullWidth={true}
-                           sx={{paddingTop: 1}}
+                           sx={{paddingTop: 0}}
                            InputProps={{
                                readOnly: readonly,
+                               padding: "0px"
                            }}
                            onChange={(event, newValue) => {
                                newLabel(newValue);
@@ -64,19 +97,21 @@ export default function Inventar(props) {
                            value={getLabelText()}
                            variant="standard" />
             </Grid>
-            <Grid  item xs={3}  >
+            <Grid  item xs={12} sm={3}  >
                 <Rating
                     name="hover-feedback"
                     value={value}
                     precision={1}
                     defaultValue={0}
 
-                    icon={<FiberManualRecord fontSize="inherit" />}
-
+                    onChange={handleMouseMove}
+                    onChangeActive={handleMouseMove}
+                    onMouseLeave={handleMouseMove}
+                    icon={icon}
+                    emptyIcon={icon}
                     onChange={(event, newValue) => {
                         setValue(newValue)
                     }}
-                    emptyIcon={<FiberManualRecord fontSize="inherit" />}
                 />
             </Grid>
 

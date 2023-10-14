@@ -25,12 +25,19 @@ export default function SignatureBox( props ) {
         <Grid container spacing={3} >
             <Grid item xs={12} width="100%">
                 <Paper sx={{
-                    p: 2,
+                    p: 1,
+                    m: 1,
                     display: 'flex',
                     flexDirection: 'column',
                     maxWidth: "100%",
                     elevation: "2",
                 }}>
+                    <SignatureCanvas
+                        penColor="black"
+                        canvasProps={{className: 'signature'}}
+                        ref={sigRef}
+                        onEnd={handleSignatureEnd}
+                    />
                     <Grid container spacing={0} direction="row" alignItems="baseline" margin={0}>
                         <Grid item xs={3} padding={0} >
                             <IconButton color="primary" aria-label="delete pad" size="large">
@@ -43,13 +50,6 @@ export default function SignatureBox( props ) {
                             </Typography>
                         </Grid>
                     </Grid>
-
-                    <SignatureCanvas
-                        penColor="black"
-                        canvasProps={{className: 'signature'}}
-                        ref={sigRef}
-                        onEnd={handleSignatureEnd}
-                    />
                 </Paper>
             </Grid>
         </Grid>

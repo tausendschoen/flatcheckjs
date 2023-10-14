@@ -9,6 +9,7 @@ import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import ImageGrid from "./ImageGrid";
+import Paper from "@mui/material/Paper";
 
 
 export const Inventar_Zimmer = ["Tür", "Türzarge", "Wand", "Boden", "Fußleisten", "Decke", "Steckdosen", "Schalter", "Heizung",
@@ -67,26 +68,40 @@ export default function Zimmer(props) {
     console.log("Zimmer: " + props.name + " open " + open);
     if (open === false)
         return (
-            <>
-                <Divider/>
-                <Grid container spacing={3} paddingTop={1} paddingLeft={1} paddingBottom={2}>
-                    <Grid item xs={11}> <Typography variant="h6">{props.name}</Typography></Grid>
+            <Paper sx={{
+                p: 1,
+                m: 1,
+                display: 'flex',
+                flexDirection: 'column',
+                maxWidth: "100%",
+                elevation: "2",
+            }}>
+                <Grid container spacing={1} paddingLeft={1} >
+                    <Grid item xs={11}> <Typography variant="h6">{props.name} (nicht relevant)</Typography></Grid>
                     <Grid item xs={1}>
                         <IconButton color="primary" onClick={handleClick}><Visibility/></IconButton>
                     </Grid>
                 </Grid>
-            </>
+            </Paper>
+
         )
     else
         return (
-            <>
-                <Divider className="page-break"/>
-                <Grid container spacing={3} paddingTop={1} paddingLeft={1} paddingBottom={2} alignItems="center">
+            <Paper sx={{
+                p: 1,
+                m: 1,
+                display: 'flex',
+                flexDirection: 'column',
+                maxWidth: "100%",
+                elevation: "2",
+            }}>
+
+                <Grid container spacing={1} paddingLeft={1} alignItems="center">
                     <Grid item xs={11}> <Typography variant="h6">{props.name}</Typography></Grid>
                     <Grid item xs={1}>
                         <IconButton color="primary" onClick={handleClick}><VisibilityOff/></IconButton>
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={12} md={8}>
                         <TextField id="heizungszähler" label="Heizungszähler" required={true}
                                    fullWidth={true} type="text"
                                    InputLabelProps={{
@@ -101,12 +116,12 @@ export default function Zimmer(props) {
                                    }}
                         />
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={12} md={4}>
                         <FormGroup><FormControlLabel control={<Switch/>}
                                                      label="Schlüssel"/></FormGroup>
                     </Grid>
                 </Grid>
-                <Box sx={{p: "2"}}>
+                <Box sx={{p: 0, m: 1 }}>
                     {inventar.map((element, index) => {
                         return (
                             <Inventar id={index} label={element.label} set={setInventarValue}/>
@@ -121,8 +136,7 @@ export default function Zimmer(props) {
                 <Box sx={{m: 1}}>
                     <ImageGrid></ImageGrid>
                 </Box>
-
-            </>
+            </Paper>
 
         );
 

@@ -43,19 +43,10 @@ class App extends React.PureComponent {
         return (
             <div>
                 <ButtonAppBar/>
-                <Box sx={{p: 1}}>
-                    <ProtokollKopf/>
-                </Box>
-                <Box sx={{p: 1}}>
-                    <Schluessel/>
-                </Box>
-                <Box sx={{p: 1}}>
-                    <ZimmerListe open={this.props.open}/>
-                </Box>
-                <Box sx={{p: 1}}>
-                    <Signature/>
-                </Box>
-
+                <ProtokollKopf/>
+                <Schluessel/>
+                <ZimmerListe open={this.props.open}/>
+                <Signature/>
             </div>
         );
     }

@@ -11,6 +11,7 @@ export default function Schluessel() {
         <React.Fragment>
             <Paper sx={{
                 p: 2,
+                m: 1,
                 display: 'flex',
                 flexDirection: 'column',
                 maxWidth: "100%",

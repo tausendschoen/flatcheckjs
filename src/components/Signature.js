@@ -18,11 +18,11 @@ export default function Signature() {
     return (
 
         <Grid container spacing={3} >
-            <Grid item xs={12} sm={6} width="100%" >
+            <Grid item xs={12} md={6} width="100%" >
                    <SignatureBox title="Unterschrift Mieter" />
             </Grid>
 
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} md={6}>
                     <SignatureBox title="Unterschrift Vermieter" />
             </Grid>
         </Grid>

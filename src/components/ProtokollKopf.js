@@ -7,7 +7,8 @@ import Paper from '@mui/material/Paper';
 export default function ProtokollKopf() {
     return (
             <Paper sx={{
-                p: 2,
+                p: 1,
+                m: 1,
                 display: 'flex',
                 flexDirection: 'column',
                 maxWidth: "100%",
