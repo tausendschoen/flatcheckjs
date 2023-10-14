@@ -8,6 +8,7 @@ import {Delete, Gradient, Visibility, VisibilityOff} from "@mui/icons-material";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
+import ImageGrid from "./ImageGrid";
 
 
 export const Inventar_Zimmer = ["Tür", "Türzarge", "Wand", "Boden", "Fußleisten", "Decke", "Steckdosen", "Schalter", "Heizung",
@@ -117,6 +118,10 @@ export default function Zimmer(props) {
                 <Box sx={{m: 1}}>
                     <TextField fullWidth multiline rows={3} label="Zusatzinformationen"></TextField>
                 </Box>
+                <Box sx={{m: 1}}>
+                    <ImageGrid></ImageGrid>
+                </Box>
+
             </>
 
         );
