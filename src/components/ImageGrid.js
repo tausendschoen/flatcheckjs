@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import WebcamDialog from "./WebcamDialog"; // Importieren Sie Ihre Webcam-Dialog-Komponente hier
-import DeleteIcon from "@mui/icons-material/Delete"; // Importieren Sie das Löschen-Icon
+import DeleteIcon from "@mui/icons-material/Delete";
+import Button from "@mui/material/Button";
+import {Camera} from "@mui/icons-material"; // Importieren Sie das Löschen-Icon
 
 const ImageGrid = () => {
     const [openDialog, setOpenDialog] = useState(false);
@@ -75,22 +77,13 @@ const ImageGrid = () => {
                     </div>
                 ))}
             </div>
-            <button
+            <Button
+                variant={"contained"}
                 onClick={showCamera}
-                style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    marginTop: "10px",
-                    backgroundColor: "#007BFF",
-                    color: "white",
-                    padding: "10px",
-                    border: "none",
-                    cursor: "pointer",
-                }}
+                startIcon={<Camera/>}
             >
-                <span>Aufnehmen</span>
-            </button>
+                Fotos
+            </Button>
         </div>
     );
 };
