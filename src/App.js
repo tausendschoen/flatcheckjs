@@ -1,6 +1,6 @@
 import './App.css';
 import * as React from "react";
-import {useRef, useState} from "react";
+import {useRef} from "react";
 import ReactToPrint from 'react-to-print';
 import ButtonAppBar from "./components/AppBar";
 import Schluessel from "./components/Schluessel";

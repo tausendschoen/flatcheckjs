@@ -7,6 +7,7 @@ import {Camera} from "@mui/icons-material"; // Importieren Sie das Löschen-Icon
 const ImageGrid = () => {
     const [openDialog, setOpenDialog] = useState(false);
     const [capturedImage, setCapturedImage] = useState(null);
+
     const [images, setImages] = useState([]);
     const gridRef = useRef(null);
 
@@ -15,27 +16,26 @@ const ImageGrid = () => {
         setImages((prevImages) => [...prevImages, image]);
     };
 
+
     const deleteImage = (index) => {
         const updatedImages = [...images];
         updatedImages.splice(index, 1);
         setImages(updatedImages);
     };
 
+
     const showCamera = () => {
         setOpenDialog(!openDialog);
     };
 
-    useEffect(() => {
-        // Fügen Sie hier optionalen Code hinzu, um Bilder aus verschiedenen Quellen oder APIs abzurufen und sie zum Grid hinzuzufügen.
-    }, []);
 
     useEffect(() => {
         // Wenn sich die Fenstergröße ändert, berechnen Sie die Anzahl der Bilder pro Zeile basierend auf der Fensterbreite.
         const handleResize = () => {
             const grid = gridRef.current;
-            const containerWidth = grid.offsetWidth;
+            // const containerWidth = grid.offsetWidth;
             const minImageSize = 240; // Mindestgröße für Bilder
-            const minImagesPerRow = Math.floor(containerWidth / minImageSize);
+            // const minImagesPerRow = Math.floor(containerWidth / minImageSize);
             grid.style.gridTemplateColumns = `repeat(auto-fit, minmax(${minImageSize}px, 1fr))`;
         };
 
@@ -46,6 +46,7 @@ const ImageGrid = () => {
             window.removeEventListener("resize", handleResize);
         };
     }, []);
+
 
     return (
         <div>
@@ -77,6 +78,7 @@ const ImageGrid = () => {
                     </div>
                 ))}
             </div>
+
             <Button
                 variant={"contained"}
                 onClick={showCamera}

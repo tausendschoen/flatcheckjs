@@ -1,20 +1,13 @@
-import {makeStyles, Rating} from "@mui/material";
-import {Assignment, FiberManualRecord} from "@mui/icons-material";
+import {Rating} from "@mui/material";
+import { FiberManualRecord} from "@mui/icons-material";
 import TextField from "@mui/material/TextField";
 import * as React from "react";
 import Grid from "@mui/material/Grid";
-import { styled } from '@mui/system';
-
 
 const labels = {
     1: 'defekt', 2: 'stark gebraucht', 3: 'gebraucht', 4: 'neuwertig', 5: 'neu',
 };
 
-const CustomRating = styled(Rating)({
-    '& .MuiRating-iconFilled': {
-        color: 'gold', // Ändere hier die gewünschte Farbe
-    },
-})
 
 /**
  * Eine Inventar eines ZimmerListe. Ein Inventar ist z.B. eine Tür oder eine Steckdose.
@@ -40,7 +33,7 @@ export default function Inventar(props) {
     }
 
     function getLabelText()  {
-        let retValue = "";
+        let retValue;
         if( labels[value] )
             retValue = props.label + " (" + labels[value] + ")";
         else
@@ -84,7 +77,7 @@ export default function Inventar(props) {
 
     return (<>
         <Grid container spacing={1} padding={1} width={"100%"}>
-            <Grid iten xs={12} sm={9}>
+            <Grid iten xs={8} >
                 <TextField fullWidth={true}
                            sx={{paddingTop: 0}}
                            InputProps={{
@@ -97,14 +90,13 @@ export default function Inventar(props) {
                            value={getLabelText()}
                            variant="standard" />
             </Grid>
-            <Grid  item xs={12} sm={3}  >
+            <Grid  item xs={4} >
                 <Rating
                     name="hover-feedback"
                     value={value}
                     precision={1}
                     defaultValue={0}
 
-                    onChange={handleMouseMove}
                     onChangeActive={handleMouseMove}
                     onMouseLeave={handleMouseMove}
                     icon={icon}
