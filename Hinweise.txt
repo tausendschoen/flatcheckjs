@@ -1,0 +1,10 @@
+Fehler:  ProcessError: fatal: A branch named 'gh-pages' already exists.
+Lösung:  modules/.cache/gh-pages löschen
+
+Fehler beim Kommando gh-pages: npm run deploy
+Meldung: ProcessError: bash: /dev/tty: No such device or address
+Lösung github command line tools installiert https://github.com/cli/cli#installation
+Dann Neue Schelle aufgemacht weil die Path Variable verändert wurde
+Dann die Credetials festegelegt: git auth login
+Dann funktioniert es
+
