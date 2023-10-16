@@ -20,6 +20,19 @@ export default function SignatureBox( props ) {
         setSignature(null);
     }
 
+    function CenteredIconButton() {
+        return (
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <IconButton>
+                    <DeleteOutline onClick={clearSignature}/>
+                </IconButton>
+                <Typography variant="h6">
+                    Unterschrift Mieter 2
+                </Typography>
+            </div>
+        );
+    }
+
     return (
 
         <Grid container spacing={3} >
@@ -36,21 +49,23 @@ export default function SignatureBox( props ) {
                         penColor="black"
                         canvasProps={{className: 'signature'}}
                         ref={sigRef}
+                        canvasProps={{height: "200px", border: "1px solid black", color: "blue"}}
                         onEnd={handleSignatureEnd}
                     />
-                    <Grid container spacing={0} direction="row" alignItems="baseline" margin={0}>
-                        <Grid item xs={3} padding={0} >
-                            <IconButton color="primary" aria-label="delete pad" size="large">
-                                <DeleteOutline onClick={clearSignature}/>
-                            </IconButton>
-                        </Grid>
-                        <Grid item xs={9}>
-                            <Typography variant="body1" gutterBottom>
-                                Unterschrift Mieter
-                            </Typography>
-                        </Grid>
-                    </Grid>
                 </Paper>
+
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <IconButton color="primary" aria-label="delete pad" size="large">
+                        <DeleteOutline onClick={clearSignature}/>
+                    </IconButton>
+                    <Typography variant="body1" gutterBottom sx={{paddingTop: "0.5em"}}>
+                        Unterschrift Mieter
+                    </Typography>
+                </div>
+
+
+
+
             </Grid>
         </Grid>
     )
