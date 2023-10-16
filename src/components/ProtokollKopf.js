@@ -40,6 +40,16 @@ export default function ProtokollKopf() {
                         variant="standard"
                     />
                 </Grid>
+                <Grid item xs={12}>
+                    <TextField
+                        required
+                        id="adresseWhg"
+                        name="Adresse Wohnung"
+                        label="Adresse Wohnung"
+                        fullWidth
+                        variant="standard"
+                    />
+                </Grid>
 
                 <Grid item xs={12}>
                     <TextField
@@ -47,6 +57,17 @@ export default function ProtokollKopf() {
                         id="mietername"
                         name="mietername"
                         label="Name Mieter"
+                        fullWidth
+                        variant="standard"
+                    />
+                </Grid>
+
+                <Grid item xs={12}>
+                    <TextField
+                        required
+                        id="neueAdresse"
+                        name="neueAdresse"
+                        label="Neue Adresse"
                         fullWidth
                         variant="standard"
                     />
@@ -63,9 +84,9 @@ export default function ProtokollKopf() {
                 </Grid>
                 <Grid item xs={12}>
                     <TextField
-                        id="vermieter"
+                        id="teilneherVermieter"
                         name="vermieter"
-                        label="Vermieter"
+                        label="Teilnehmer Vermieter"
                         fullWidth
                         variant="standard"
                     />

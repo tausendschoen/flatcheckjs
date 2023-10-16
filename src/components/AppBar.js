@@ -5,6 +5,8 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
 
+const version = "0.9.1";
+
 export default function ButtonAppBar(props) {
 
     return (
@@ -12,7 +14,7 @@ export default function ButtonAppBar(props) {
             <AppBar position="static">
                 <Toolbar>
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                        Wohnungszustandsprotokoll (v0.9)
+                        Wohnungszustandsprotokoll {version}
                     </Typography>
                 </Toolbar>
             </AppBar>

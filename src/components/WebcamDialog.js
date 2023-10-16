@@ -8,6 +8,7 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import Grid from "@mui/material/Grid";
+import {Cameraswitch, Recycling} from "@mui/icons-material";
 
 const WebcamDialog = ({ open = true, onClose, onCapture }) => {
 
@@ -64,12 +65,13 @@ const WebcamDialog = ({ open = true, onClose, onCapture }) => {
                     <Grid iten xs={6}>
                         {cameras.length > 1 && (
                         <div style={{display: "flex", justifyContent: "left", width: "45%"}}>
-                            <Button
+                            <IconButton
+                                edge="end"
+                                color="inherit"
                                 onClick={handleCameraSwitch}
-                                variant="outlined"
                             >
-                                Kamera wählen
-                            </Button>
+                                <Cameraswitch/>
+                            </IconButton>
                         </div>
                             )}
                     </Grid>

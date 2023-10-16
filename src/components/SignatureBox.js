@@ -38,6 +38,7 @@ export default function SignatureBox( props ) {
         <Grid container spacing={3} >
             <Grid item xs={12} width="100%">
                 <Paper sx={{
+                    background: '#EEE',
                     p: 1,
                     m: 1,
                     display: 'flex',
