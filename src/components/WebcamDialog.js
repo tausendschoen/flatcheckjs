@@ -8,7 +8,7 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import Grid from "@mui/material/Grid";
-import {Cameraswitch, Recycling} from "@mui/icons-material";
+import {Cameraswitch} from "@mui/icons-material";
 
 const WebcamDialog = ({ open = true, onClose, onCapture }) => {
 

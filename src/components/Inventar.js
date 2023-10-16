@@ -1,5 +1,5 @@
 import {Rating} from "@mui/material";
-import { FiberManualRecord} from "@mui/icons-material";
+import {FiberManualRecord} from "@mui/icons-material";
 import TextField from "@mui/material/TextField";
 import * as React from "react";
 import Grid from "@mui/material/Grid";
@@ -25,89 +25,51 @@ const labels = {
 export default function Inventar(props) {
 
     const [value, setValue] = React.useState(0);
-    const [ratingColor, setRatingColor] = React.useState("grey");
-    let icon = <FiberManualRecord color="white"  fontSize="inherit" />;
+    const [label, setLabel] = React.useState(props.label);
 
-    function newLabel( label ) {
-        props.set( props.id, label, props.value);
+    let icon = <FiberManualRecord color="white" fontSize="inherit"/>;
+
+
+    function getLabelText() {
+        return labels[value] ? label + " (" + labels[value] + ")" : label;
     }
-
-    function getLabelText()  {
-        let retValue;
-        if( labels[value] )
-            retValue = props.label + " (" + labels[value] + ")";
-        else
-            retValue = props.label ;
-
-        return retValue;
-    }
-
-
-
-    function handleMouseMove(event, newValue) {
-        switch( newValue ) {
-            case 1 :
-                setRatingColor("orange");
-                break;
-            case 2 :
-                setRatingColor("yellow");
-                break;
-            case 3 :
-                setRatingColor("grey");
-                break;
-            case 4 :
-                setRatingColor("green");
-                break;
-            case 5 :
-                setRatingColor("green");
-                break;
-
-            default:
-                setRatingColor("grey");
-        }
-        icon = <FiberManualRecord style={{color: ratingColor}}  fontSize="inherit" />;
-        console.log("log " + newValue +  " " + icon);
-    }
-
-    // wenn das Textfeld keinen Wert hat, dann kann dieser eingegeben werden. Ansonsten ist
-    // der Wert/ Name des Textfeldes fest definiert
-    let readonly = props.label !== "";
 
     console.log("redraw");
 
-    return (<>
-        <Grid container spacing={1} padding={1} width={"100%"}>
-            <Grid iten xs={8} >
-                <TextField fullWidth={true}
-                           sx={{paddingTop: 0}}
-                           InputProps={{
-                               readOnly: readonly,
-                               padding: "0px"
-                           }}
-                           onChange={(event, newValue) => {
-                               newLabel(newValue);
-                           }}
-                           value={getLabelText()}
-                           variant="standard" />
+    return (
+        <>
+            <Grid container spacing={1} padding={1} width={"100%"}>
+                <Grid iten xs={8}>
+                    <TextField fullWidth={true}
+                               sx={{paddingTop: 0}}
+                               InputProps={{
+                                   readOnly: false,
+                                   padding: "0px"
+                               }}
+                               onChange={(event, newValue) => {
+                                   console.log("NewValue: " + event.target.value);
+                                   setLabel(event.target.value);
+                               }
+                               }
+                               value={getLabelText()}
+                               variant="standard"/>
+                </Grid>
+                <Grid item xs={4}>
+                    <Rating
+                        name="hover-feedback"
+                        value={value}
+                        precision={1}
+                        defaultValue={0}
+
+                        icon={icon}
+                        emptyIcon={icon}
+                        onChange={(event, newValue) => {
+                            setValue(newValue)
+                        }}
+                    />
+                </Grid>
+
             </Grid>
-            <Grid  item xs={4} >
-                <Rating
-                    name="hover-feedback"
-                    value={value}
-                    precision={1}
-                    defaultValue={0}
 
-                    onChangeActive={handleMouseMove}
-                    onMouseLeave={handleMouseMove}
-                    icon={icon}
-                    emptyIcon={icon}
-                    onChange={(event, newValue) => {
-                        setValue(newValue)
-                    }}
-                />
-            </Grid>
-
-        </Grid>
-
-    </>);
+        </>);
 }

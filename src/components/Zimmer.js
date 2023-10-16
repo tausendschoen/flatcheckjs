@@ -1,15 +1,17 @@
 import * as React from "react";
+import {useEffect} from "react";
 
-import {Divider, FormControlLabel, FormGroup, InputAdornment, Switch} from "@mui/material";
+import {FormControlLabel, FormGroup, InputAdornment, Switch} from "@mui/material";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Inventar from "./Inventar";
-import {Delete, Gradient, Visibility, VisibilityOff} from "@mui/icons-material";
+import {AddCircle, Camera, EditNote, Gradient, Visibility, VisibilityOff} from "@mui/icons-material";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import ImageGrid from "./ImageGrid";
 import Paper from "@mui/material/Paper";
+import Button from "@mui/material/Button";
 
 
 export const Inventar_Zimmer = ["Tür", "Türzarge", "Wand", "Boden", "Fußleisten", "Decke", "Steckdosen", "Schalter", "Heizung",
@@ -38,19 +40,28 @@ export default function Zimmer(props) {
     const [inventar, setInventar] = React.useState([]);
     // Darstellung des InventarDialogs
     const [open, setOpen] = React.useState(true);
+    const [showComment, setShowComment] = React.useState(false);
+    const [showDialog, setShowDialog] = React.useState(false);
 
     let inventarListe = props.inventarListe;
-    let sonstiges = props.sonstiges;
-
-    // Sortieren des Array.
-    for (let i = 0; i < sonstiges; i++)
-        inventarListe = inventarListe.concat(['']);
 
     // initialisiere Inventar
-    if (inventar.length === 0) {
-        for (let i = 0; i < inventarListe.length; i++) {
-            inventar[i] = {label: inventarListe[i], value: 0};
+    useEffect(() => {
+            if (inventarListe.length > 0) {
+                let tmpInventar = [];
+                for (let i = 0; i < inventarListe.length; i++) {
+                    tmpInventar = tmpInventar.concat({label: inventarListe[i], value: 0, id: i});
+                }
+                setInventar(tmpInventar);
+            }
         }
+        , []);
+
+
+    function addElement() {
+        let tmpInventar = [...inventar];
+        tmpInventar = tmpInventar.concat({id: tmpInventar.length, label: '', value: 0});
+        setInventar(tmpInventar);
     }
 
     function setInventarValue(id, label, value) {
@@ -61,7 +72,7 @@ export default function Zimmer(props) {
         setInventar(localList);
     }
 
-    function handleClick(e) {
+    function handleClick() {
         setOpen(!open);
     }
 
@@ -76,7 +87,7 @@ export default function Zimmer(props) {
                 maxWidth: "100%",
                 elevation: "2",
             }}>
-                <Grid container spacing={1} paddingLeft={1} >
+                <Grid container spacing={1} paddingLeft={1}>
                     <Grid item xs={11}> <Typography variant="h6">{props.name} (nicht relevant)</Typography></Grid>
                     <Grid item xs={1}>
                         <IconButton color="primary" onClick={handleClick}><Visibility/></IconButton>
@@ -121,21 +132,35 @@ export default function Zimmer(props) {
                                                      label="Schlüssel"/></FormGroup>
                     </Grid>
                 </Grid>
-                <Box sx={{p: 0, m: 1 }}>
-                    {inventar.map((element, index) => {
+                <Box sx={{p: 0, marginLeft: 1, m: 1}}> {
+                    inventar.map((element, index) => {
                         return (
                             <Inventar id={index} label={element.label} set={setInventarValue}/>
                         )
                     })
-                    }
-                </Box>
-                <Divider/>
-                <Box sx={{m: 1}}>
-                    <TextField fullWidth multiline rows={3} label="Zusatzinformationen"></TextField>
+                }
                 </Box>
                 <Box sx={{m: 1}}>
-                    <ImageGrid></ImageGrid>
+                    <Button startIcon={<AddCircle/>} sx={{marginRight: 1}}
+                            onClick={addElement}>
+                        Inventar
+                    </Button>
+                    <Button startIcon={<EditNote/>} sx={{marginRight: 1}}
+                            onClick={() => setShowComment(!showComment)}>
+                        Kommentar
+                    </Button>
+                    <Button  onClick={() => {
+                        setShowDialog(true)
+                    }}
+                            startIcon={<Camera/>}
+                    > Fotos </Button>
                 </Box>
+                <Box sx={{m: 1}}>
+                    {showComment && (<TextField fullWidth multiline rows={3} label="Zusatzinformationen"></TextField>)}
+                </Box>
+
+                {showDialog && (<ImageGrid/>)}
+
             </Paper>
 
         );
