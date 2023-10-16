@@ -5,9 +5,9 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from "@mui/material/IconButton";
 import {Menu, MenuItem} from "@mui/material";
-import {MenuBook, MenuOpen} from "@mui/icons-material";
+import MenuIcon from '@mui/icons-material/Menu';
 
-const version = "0.1.3";
+const version = "0.1.4";
 
 export default function ButtonAppBar(props) {
 
@@ -35,7 +35,7 @@ export default function ButtonAppBar(props) {
                         sx={{ mr: 2 }}
                         onClick={handleClick}
                     >
-                        <MenuBook/>
+                        <MenuIcon/>
                     </IconButton>
                     <Menu
                         id="basic-menu"
