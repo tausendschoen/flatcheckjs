@@ -3,6 +3,7 @@ import {FiberManualRecord} from "@mui/icons-material";
 import TextField from "@mui/material/TextField";
 import * as React from "react";
 import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
 
 const labels = {
     1: 'defekt', 2: 'stark gebraucht', 3: 'gebraucht', 4: 'neuwertig', 5: 'neu',
@@ -26,45 +27,62 @@ export default function Inventar(props) {
 
     const [value, setValue] = React.useState(0);
     const [label, setLabel] = React.useState(props.label);
+    const [error, setError] = React.useState(null);
 
     let icon = <FiberManualRecord color="white" fontSize="inherit"/>;
 
-
-    function getLabelText() {
-        return labels[value] ? label + " (" + labels[value] + ")" : label;
+    function checkLabel(label) {
+        if( props.checkFunction(label) ) {
+            setError(`Das Inventar '${label}' gibt es schon`);
+        } else
+            setError('');
     }
 
-    console.log("redraw");
+    const handleInputChange = (event) => {
+        let label = event.target.value;
+        console.log(`handleInputChange '${label}'`);
+        // Die Leerzeichen bleiben im Namen, weil der Anwender ev. noch weiterschreiben will
+        setLabel(label);
+        // hier werden die Leerzeichen rausgenommen
+        label = label ? label.trim() : label;
+        checkLabel(label);
+    };
+
+    function getLabelText() {
+        return (Boolean(label) && value) ? `${label} (${labels[value]})` : label;
+    }
 
     return (
         <>
             <Grid container spacing={1} padding={1} width={"100%"}>
-                <Grid iten xs={8}>
+                <Grid iten xs={6}>
                     <TextField fullWidth={true}
                                sx={{paddingTop: 0}}
+                               error={Boolean(error)}
+                               helperText={error}
                                InputProps={{
                                    readOnly: false,
                                }}
-                               onChange={(event) => {
-                                   setLabel(event.target.value);
-                               }
-                               }
-                               value={getLabelText()}
+                               onChange={handleInputChange}
+                               value={label}
                                variant="standard"/>
                 </Grid>
-                <Grid item xs={4}>
+
+                <Grid item xs={6}>
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
                     <Rating
                         name="hover-feedback"
                         value={value}
                         precision={1}
                         defaultValue={0}
-
                         icon={icon}
                         emptyIcon={icon}
                         onChange={(event, newValue) => {
                             setValue(newValue)
                         }}
                     />
+                    <Typography variant="overline" component="div" sx={{ marginLeft: 1 }}>{labels[value]}</Typography>
+                    </div>
                 </Grid>
             </Grid>
         </>);

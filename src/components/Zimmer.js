@@ -1,7 +1,7 @@
 import * as React from "react";
 import {useEffect} from "react";
 
-import {FormControlLabel, FormGroup, InputAdornment, Switch} from "@mui/material";
+import {Alert, FormControlLabel, FormGroup, InputAdornment, Switch} from "@mui/material";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Inventar from "./Inventar";
@@ -29,6 +29,7 @@ export const Inventar_Keller = ["Tür", "Boden", "Schalter", "Steckdose", "Fenst
 /**
  *
  * @param props.inventarListe {[string]} Liste des Inventars in dem Zimmer
+ *         Ein InventarElement hat die Attribute id, label, value
  * @return {JSX.Element}
  * @constructor
  */
@@ -39,6 +40,7 @@ export default function Zimmer(props) {
     const [open, setOpen] = React.useState(true);
     const [showComment, setShowComment] = React.useState(false);
     const [showDialog, setShowDialog] = React.useState(false);
+
 
     let inventarListe = props.inventarListe;
 
@@ -53,6 +55,18 @@ export default function Zimmer(props) {
             }
         }
         , []);
+
+    function containsInventar( label ) {
+        console.log(`containsInventar ${label}`)
+        let retValue = false;
+        for( let i in inventarListe ) {
+            console.log(`compare ${i} ${inventarListe[i]}`);
+            if( inventarListe[i] === label )
+                retValue = true;
+        }
+        console.log(`containsInventar ${label} ${retValue}`)
+        return retValue;
+    }
 
 
     function addElement() {
@@ -95,6 +109,8 @@ export default function Zimmer(props) {
         )
     else
         return (
+
+
             <Paper sx={{
                 p: 1,
                 m: 1,
@@ -132,7 +148,7 @@ export default function Zimmer(props) {
                 <Box sx={{p: 0, marginLeft: 1, m: 1}}> {
                     inventar.map((element, index) => {
                         return (
-                            <Inventar id={index} label={element.label} set={setInventarValue}/>
+                            <Inventar id={index} label={element.label} set={setInventarValue} checkFunction={containsInventar}/>
                         )
                     })
                 }

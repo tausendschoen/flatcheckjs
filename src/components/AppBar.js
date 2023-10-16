@@ -7,7 +7,7 @@ import IconButton from "@mui/material/IconButton";
 import {Menu, MenuItem} from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
 
-const version = "0.1.4";
+const version = "0.1.5";
 
 export default function ButtonAppBar(props) {
 
