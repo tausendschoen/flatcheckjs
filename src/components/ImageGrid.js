@@ -5,16 +5,13 @@ import DeleteIcon from "@mui/icons-material/Delete";
 const ImageGrid = () => {
 
     const [openDialog, setOpenDialog] = useState(true);
-    const [capturedImage, setCapturedImage] = useState(null);
 
     const [images, setImages] = useState([]);
     const gridRef = useRef(null);
 
     const handleCapture = (image) => {
-        setCapturedImage(image);
         setImages((prevImages) => [...prevImages, image]);
     };
-
 
     const deleteImage = (index) => {
         const updatedImages = [...images];

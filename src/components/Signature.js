@@ -1,19 +1,10 @@
-import Paper from "@mui/material/Paper";
 
-import React, {useRef, useState} from "react";
-import SignatureCanvas from 'react-signature-canvas'
-import Typography from "@mui/material/Typography";
+import React from "react";
 import Grid from "@mui/material/Grid";
-import IconButton from "@mui/material/IconButton";
-import {DeleteOutline} from "@mui/icons-material";
 import SignatureBox from "./SignatureBox";
 
-function DeleteIcon() {
-    return null;
-}
 
 export default function Signature() {
-
 
     return (
 

@@ -35,7 +35,7 @@ const WebcamDialog = ({ open = true, onClose, onCapture }) => {
         const getCameras = async () => {
             try {
                 const devices = await navigator.mediaDevices.enumerateDevices();
-                devices.map((device) => { console.log(device.label); });
+                devices.map((device) => { console.log(device.label); return "";});
 
                 const videoDevices = devices.filter((device) => device.kind === "videoinput");
                 const deviceIds = videoDevices.map((device) => device.deviceId);

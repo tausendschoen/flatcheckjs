@@ -1,4 +1,4 @@
-import React, {useRef, useState} from "react";
+import React, {useRef} from "react";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import IconButton from "@mui/material/IconButton";
@@ -7,30 +7,17 @@ import Typography from "@mui/material/Typography";
 import SignatureCanvas from "react-signature-canvas";
 
 
-export default function SignatureBox( props ) {
+export default function SignatureBox() {
 
     const sigRef = useRef();
-    const [signature, setSignature] = useState(null);
+    // const [signature, setSignature] = useState(null);
 
     const handleSignatureEnd = () => {
-        setSignature(sigRef.current.toDataURL());
+        //setSignature(sigRef.current.toDataURL());
     }
     const clearSignature = () => {
         sigRef.current.clear();
-        setSignature(null);
-    }
-
-    function CenteredIconButton() {
-        return (
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <IconButton>
-                    <DeleteOutline onClick={clearSignature}/>
-                </IconButton>
-                <Typography variant="h6">
-                    Unterschrift Mieter 2
-                </Typography>
-            </div>
-        );
+        // setSignature(null);
     }
 
     return (
@@ -48,7 +35,6 @@ export default function SignatureBox( props ) {
                 }}>
                     <SignatureCanvas
                         penColor="black"
-                        canvasProps={{className: 'signature'}}
                         ref={sigRef}
                         canvasProps={{height: "200px", border: "1px solid black", color: "blue"}}
                         onEnd={handleSignatureEnd}
@@ -63,10 +49,6 @@ export default function SignatureBox( props ) {
                         Unterschrift Mieter
                     </Typography>
                 </div>
-
-
-
-
             </Grid>
         </Grid>
     )

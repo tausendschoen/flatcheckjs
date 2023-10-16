@@ -44,10 +44,8 @@ export default function Inventar(props) {
                                sx={{paddingTop: 0}}
                                InputProps={{
                                    readOnly: false,
-                                   padding: "0px"
                                }}
-                               onChange={(event, newValue) => {
-                                   console.log("NewValue: " + event.target.value);
+                               onChange={(event) => {
                                    setLabel(event.target.value);
                                }
                                }
@@ -68,8 +66,6 @@ export default function Inventar(props) {
                         }}
                     />
                 </Grid>
-
             </Grid>
-
         </>);
 }

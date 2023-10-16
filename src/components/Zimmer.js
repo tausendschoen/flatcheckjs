@@ -28,10 +28,7 @@ export const Inventar_Keller = ["Tür", "Boden", "Schalter", "Steckdose", "Fenst
 
 /**
  *
- * @param schlüssel {boolean} gibt an ob der Raum einen Schlüssel hat
- * @param heizungszähler {boolean} gibt an ob der Raum eine Heizung hat
- * @param inventarListe {array} Liste des Inventars, dass kontrolliert werden soll
- * @param sonstiges {number} Anzahl der Zusatzfelder
+ * @param props.inventarListe {[string]} Liste des Inventars in dem Zimmer
  * @return {JSX.Element}
  * @constructor
  */
@@ -65,7 +62,7 @@ export default function Zimmer(props) {
     }
 
     function setInventarValue(id, label, value) {
-        console.log("setInventarValue " + id + " " + "label " + value);
+        console.log(`setInventarValue: ${id}, ${label}, ${value},`);
         let localList = [...inventar];
         localList[id] = {label: label, value: value};
         localList[id] = {label, value};
