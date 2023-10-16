@@ -147,7 +147,7 @@ export default function Zimmer(props) {
                     </Button>
                     <Button startIcon={<EditNote/>} sx={{marginRight: 1}}
                             onClick={() => setShowComment(!showComment)}>
-                        Kommentar
+                        Hinweise
                     </Button>
                     <Button  onClick={() => {
                         setShowDialog(true)
@@ -156,7 +156,7 @@ export default function Zimmer(props) {
                     > Fotos </Button>
                 </Box>
                 <Box sx={{m: 1}}>
-                    {showComment && (<TextField fullWidth multiline rows={3} label="Zusatzinformationen"></TextField>)}
+                    {showComment && (<TextField fullWidth multiline rows={3} label="Hinweistext"></TextField>)}
                 </Box>
 
                 {showDialog && (<ImageGrid/>)}
