@@ -5,7 +5,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
 
-const version = "0.9.1";
+const version = "0.1.2";
 
 export default function ButtonAppBar(props) {
 
