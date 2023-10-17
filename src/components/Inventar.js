@@ -4,6 +4,8 @@ import TextField from "@mui/material/TextField";
 import * as React from "react";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
 
 const labels = {
     1: 'defekt', 2: 'stark gebraucht', 3: 'gebraucht', 4: 'neuwertig', 5: 'neu',
@@ -23,6 +25,16 @@ const labels = {
  * @return {JSX.Element}
  * @constructor
  */
+
+const commonStyles = {
+    bgcolor: 'background.paper',
+    border: 1,
+    m: 1,
+    borderColor: 'text.primary',
+    width: '100%',
+};
+
+
 export default function Inventar(props) {
 
     const [value, setValue] = React.useState(0);
@@ -53,23 +65,24 @@ export default function Inventar(props) {
     }
 
     return (
-        <>
-            <Grid container spacing={1} padding={1} width={"100%"}>
-                <Grid iten xs={6}>
+        <Paper elevation={0} style={{ padding: '2px', margin: '4px', border: '1px solid lightgrey'}}>
+            <Grid container spacing={1} padding={1} width={"100%"} color={"black"} borderColor={'primary.main'}>
+                <Grid iten xs={12} sm={6}>
                     <TextField fullWidth={true}
-                               sx={{paddingTop: 0}}
+                               sx={{paddingTop: 1, paddingLeft: 1}}
                                error={Boolean(error)}
                                helperText={error}
                                InputProps={{
                                    readOnly: false,
                                }}
+                               size="small"
                                onChange={handleInputChange}
                                value={label}
                                variant="standard"/>
                 </Grid>
 
-                <Grid item xs={6}>
-                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                <Grid item xs={12} sm={6} >
+                    <div style={{ display: 'flex', alignItems: 'center', paddingLeft: '0px' }}>
                     <Rating
                         name="hover-feedback"
                         value={value}
@@ -81,9 +94,10 @@ export default function Inventar(props) {
                             setValue(newValue)
                         }}
                     />
-                    <Typography variant="overline" component="div" sx={{ marginLeft: 1 }}>{labels[value]}</Typography>
+                    <Typography variant="body1" component="div" sx={{ marginLeft: 1 }}>{labels[value]}</Typography>
                     </div>
                 </Grid>
             </Grid>
-        </>);
+        </Paper>
+            );
 }
