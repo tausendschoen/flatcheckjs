@@ -2,30 +2,19 @@ import React, { useState, useEffect, useRef } from "react";
 import WebcamDialog from "./WebcamDialog"; // Importieren Sie Ihre Webcam-Dialog-Komponente hier
 import DeleteIcon from "@mui/icons-material/Delete";
 
-const ImageGrid = () => {
+const ImageGrid = (props) => {
 
-    const [openDialog, setOpenDialog] = useState(true);
+    const images = props.images;
+    const deleteImageFnc = props.deleteFunction;
 
-    const [images, setImages] = useState([]);
     const gridRef = useRef(null);
-
-    const handleCapture = (image) => {
-        setImages((prevImages) => [...prevImages, image]);
-    };
-
-    const deleteImage = (index) => {
-        const updatedImages = [...images];
-        updatedImages.splice(index, 1);
-        setImages(updatedImages);
-    };
-
 
     useEffect(() => {
         // Wenn sich die Fenstergröße ändert, berechnen Sie die Anzahl der Bilder pro Zeile basierend auf der Fensterbreite.
         const handleResize = () => {
             const grid = gridRef.current;
             // const containerWidth = grid.offsetWidth;
-            const minImageSize = 240; // Mindestgröße für Bilder
+            const minImageSize = 400; // Mindestgröße für Bilder
             // const minImagesPerRow = Math.floor(containerWidth / minImageSize);
             grid.style.gridTemplateColumns = `repeat(auto-fit, minmax(${minImageSize}px, 1fr))`;
         };
@@ -40,8 +29,6 @@ const ImageGrid = () => {
 
 
     return (
-        <div>
-            <WebcamDialog open={openDialog} onClose={() => setOpenDialog(false)} onCapture={handleCapture} />
 
             <div
                 ref={gridRef}
@@ -54,7 +41,7 @@ const ImageGrid = () => {
                     <div key={index} style={{ position: "relative" }}>
                         <img src={image} alt={`Bild ${index}`} style={{ width: "100%" }} />
                         <button
-                            onClick={() => deleteImage(index)}
+                            onClick={() => deleteImageFnc(index)}
                             style={{
                                 position: "absolute",
                                 bottom: "10px",
@@ -69,8 +56,6 @@ const ImageGrid = () => {
                     </div>
                 ))}
             </div>
-
-        </div>
     );
 };
 

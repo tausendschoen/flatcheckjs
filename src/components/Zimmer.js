@@ -1,7 +1,7 @@
 import * as React from "react";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 
-import {Alert, FormControlLabel, FormGroup, InputAdornment, Switch} from "@mui/material";
+import {FormControlLabel, FormGroup, InputAdornment, Switch} from "@mui/material";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Inventar from "./Inventar";
@@ -12,6 +12,7 @@ import Typography from "@mui/material/Typography";
 import ImageGrid from "./ImageGrid";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
+import WebcamDialog from "./WebcamDialog";
 
 
 export const Inventar_Zimmer = ["Tür", "Türzarge", "Wand", "Boden", "Fußleisten", "Decke", "Steckdosen", "Schalter", "Heizung",
@@ -40,6 +41,7 @@ export default function Zimmer(props) {
     const [open, setOpen] = React.useState(true);
     const [showComment, setShowComment] = React.useState(false);
     const [showDialog, setShowDialog] = React.useState(false);
+    const [images, setImages] = useState([]);
 
 
     let inventarListe = props.inventarListe;
@@ -56,18 +58,17 @@ export default function Zimmer(props) {
         }
         , []);
 
-    function containsInventar( label ) {
+    function containsInventar(label) {
         console.log(`containsInventar ${label}`)
         let retValue = false;
-        for( let i in inventarListe ) {
+        for (let i in inventarListe) {
             console.log(`compare ${i} ${inventarListe[i]}`);
-            if( inventarListe[i] === label )
+            if (inventarListe[i] === label)
                 retValue = true;
         }
         console.log(`containsInventar ${label} ${retValue}`)
         return retValue;
     }
-
 
     function addElement() {
         let tmpInventar = [...inventar];
@@ -83,11 +84,24 @@ export default function Zimmer(props) {
         setInventar(localList);
     }
 
-    function handleClick() {
+    function handleFoldComponent() {
+        // toggle state
         setOpen(!open);
+        setShowDialog(false);
     }
 
-    console.log("Zimmer: " + props.name + " open " + open);
+    const handleCapture = (image) => {
+        setImages((prevImages) => [...prevImages, image]);
+    };
+
+    const deleteImage = (index) => {
+        const updatedImages = [...images];
+        updatedImages.splice(index, 1);
+        setImages(updatedImages);
+    };
+
+    console.log(`Zimmer: ${props.name} Fold: ${open}  Camera Dialog: ${showDialog}` );
+
     if (open === false)
         return (
             <Paper sx={{
@@ -101,7 +115,7 @@ export default function Zimmer(props) {
                 <Grid container spacing={1} paddingLeft={1}>
                     <Grid item xs={11}> <Typography variant="h6">{props.name} (nicht relevant)</Typography></Grid>
                     <Grid item xs={1}>
-                        <IconButton color="primary" onClick={handleClick}><Visibility/></IconButton>
+                        <IconButton color="primary" onClick={handleFoldComponent}><Visibility/></IconButton>
                     </Grid>
                 </Grid>
             </Paper>
@@ -109,8 +123,6 @@ export default function Zimmer(props) {
         )
     else
         return (
-
-
             <Paper sx={{
                 p: 1,
                 m: 1,
@@ -123,7 +135,7 @@ export default function Zimmer(props) {
                 <Grid container spacing={1} paddingLeft={1} alignItems="center">
                     <Grid item xs={11}> <Typography variant="h6">{props.name}</Typography></Grid>
                     <Grid item xs={1}>
-                        <IconButton color="primary" onClick={handleClick}><VisibilityOff/></IconButton>
+                        <IconButton color="primary" onClick={handleFoldComponent}><VisibilityOff/></IconButton>
                     </Grid>
                     <Grid item xs={12} md={8}>
                         <TextField id="heizungszähler" label="Heizungszähler" required={true}
@@ -148,7 +160,8 @@ export default function Zimmer(props) {
                 <Box sx={{p: 0, marginLeft: 1, m: 1}}> {
                     inventar.map((element, index) => {
                         return (
-                            <Inventar id={index} label={element.label} set={setInventarValue} checkFunction={containsInventar}/>
+                            <Inventar id={index} label={element.label} set={setInventarValue}
+                                      checkFunction={containsInventar}/>
                         )
                     })
                 }
@@ -162,7 +175,7 @@ export default function Zimmer(props) {
                             onClick={() => setShowComment(!showComment)}>
                         Hinweise
                     </Button>
-                    <Button  onClick={() => {
+                    <Button onClick={() => {
                         setShowDialog(true)
                     }}
                             startIcon={<Camera/>}
@@ -172,7 +185,8 @@ export default function Zimmer(props) {
                     {showComment && (<TextField fullWidth multiline rows={3} label="Hinweistext"></TextField>)}
                 </Box>
 
-                {showDialog && (<ImageGrid/>)}
+                {showDialog && ( <WebcamDialog onClose={() => setShowDialog(false)} onCapture={handleCapture} />)}
+                {Boolean(images) && (<ImageGrid images={images} deleteFunction={deleteImage} />)}
 
             </Paper>
 

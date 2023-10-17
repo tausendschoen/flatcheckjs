@@ -30,20 +30,23 @@ const WebcamDialog = ({ open = true, onClose, onCapture }) => {
         }
     };
 
-
     useEffect(() => {
         const getCameras = async () => {
-            try {
-                const devices = await navigator.mediaDevices.enumerateDevices();
-                devices.map((device) => { console.log(device.label); return "";});
 
+            try {
+                await navigator.mediaDevices.getUserMedia({audio: false, video: true});
+                let devices = await navigator.mediaDevices.enumerateDevices();
+                console.log(devices);
+
+                devices.map((device) => { console.log(device.label); return "";});
                 const videoDevices = devices.filter((device) => device.kind === "videoinput");
                 const deviceIds = videoDevices.map((device) => device.deviceId);
                 setCameras(deviceIds);
                 console.log("Cameras found " + videoDevices.length );
 
-                if (videoDevices.length > 0) {
-                    setSelectedCamera(videoDevices[0].deviceId);
+                if (deviceIds.length > 0 && deviceIds[0] ) {
+                    setSelectedCamera(deviceIds[0]);
+                    console.log(`Camera selected ${deviceIds[0]}`);
                 }
 
             } catch (error) {
@@ -54,9 +57,11 @@ const WebcamDialog = ({ open = true, onClose, onCapture }) => {
         if (open) {
             getCameras().then();
         }
-    }, [open]);
+    }, []);
 
-    console.log("WebcamDialog render = " + open + " selected? => '" + selectedCamera + " Kameras + length: " + cameras.length);
+
+
+    console.log(`WebcamDialog render ${open} selected '${selectedCamera}' Kameras ${cameras.length}`);
 
     return (
         <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth>
