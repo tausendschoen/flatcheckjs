@@ -100,7 +100,7 @@ export default function Zimmer(props) {
         setImages(updatedImages);
     };
 
-    console.log(`Zimmer: ${props.name} Fold: ${open}  Camera Dialog: ${showDialog}` );
+    console.log(`Zimmer: ${props.name} Fold: ${open}  Camera Dialog: ${showDialog}`);
 
     if (open === false)
         return (
@@ -139,10 +139,12 @@ export default function Zimmer(props) {
                     </Grid>
                     <Grid item xs={12} md={8}>
                         <TextField id="heizungszähler" label="Heizungszähler" required={true}
+                                   variant="standard"
                                    fullWidth={true} type="text"
                                    InputLabelProps={{
                                        shrink: true,
                                    }}
+                                   size="small"
                                    InputProps={{
                                        startAdornment: (
                                            <InputAdornment position="start">
@@ -156,16 +158,18 @@ export default function Zimmer(props) {
                         <FormGroup><FormControlLabel control={<Switch/>}
                                                      label="Schlüssel"/></FormGroup>
                     </Grid>
-                </Grid>
-                <Box sx={{p: 0, marginLeft: 1, m: 1}}> {
-                    inventar.map((element, index) => {
+
+                    <Grid item xs={12} md={12} >
+                        {inventar.map((element, index) => {
                         return (
-                            <Inventar id={index} label={element.label} set={setInventarValue}
-                                      checkFunction={containsInventar}/>
+                        <Inventar id={index} label={element.label} set={setInventarValue}
+                        checkFunction={containsInventar}/>
                         )
                     })
-                }
-                </Box>
+                        }
+                    </Grid>
+                </Grid>
+
                 <Box sx={{m: 1}}>
                     <Button startIcon={<AddCircle/>} sx={{marginRight: 1}}
                             onClick={addElement}>
@@ -185,8 +189,8 @@ export default function Zimmer(props) {
                     {showComment && (<TextField fullWidth multiline rows={3} label="Hinweistext"></TextField>)}
                 </Box>
 
-                {showDialog && ( <WebcamDialog onClose={() => setShowDialog(false)} onCapture={handleCapture} />)}
-                {Boolean(images) && (<ImageGrid images={images} deleteFunction={deleteImage} />)}
+                {showDialog && (<WebcamDialog onClose={() => setShowDialog(false)} onCapture={handleCapture}/>)}
+                {Boolean(images) && (<ImageGrid images={images} deleteFunction={deleteImage}/>)}
 
             </Paper>
 

@@ -3,24 +3,37 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
+import {InputAdornment} from "@mui/material";
+import {
+    AddLocation,
+    Apartment,
+    CalendarToday,
+    Contacts,
+    Email,
+    Gradient,
+    Group,
+    Person,
+    Place
+} from "@mui/icons-material";
 
 export default function ProtokollKopf() {
     return (
-            <Paper sx={{
-                p: 1,
-                m: 1,
-                display: 'flex',
-                flexDirection: 'column',
-                maxWidth: "100%",
-                elevation: "2",
-            }}>
+        <Paper sx={{
+            p: 1,
+            m: 1,
+            display: 'flex',
+            flexDirection: 'column',
+            maxWidth: "100%",
+            elevation: "2",
+        }}>
             <Typography variant="h6" gutterBottom>
                 Wohnungsdaten
             </Typography>
 
-            <Grid container spacing={3}>
+            <Grid container spacing={1}>
                 <Grid item xs={12} sm={6}>
                     <TextField
+                        size="small"
                         required
                         id="wohnung"
                         name="Wohnung"
@@ -28,16 +41,31 @@ export default function ProtokollKopf() {
                         fullWidth
                         autoComplete="given-name"
                         variant="standard"
+                        InputProps={{
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <Apartment/>
+                                </InputAdornment>
+                            ),
+                        }}
                     />
                 </Grid>
                 <Grid item xs={12} sm={6}>
                     <TextField
+                        size="small"
                         required
                         id="datum"
                         name="Datum"
                         label="Datum"
                         fullWidth
                         variant="standard"
+                        InputProps={{
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <CalendarToday/>
+                                </InputAdornment>
+                            ),
+                        }}
                     />
                 </Grid>
                 <Grid item xs={12}>
@@ -48,6 +76,14 @@ export default function ProtokollKopf() {
                         label="Adresse Wohnung"
                         fullWidth
                         variant="standard"
+                        size={"small"}
+                        InputProps={{
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <Contacts/>
+                                </InputAdornment>
+                            ),
+                        }}
                     />
                 </Grid>
 
@@ -59,6 +95,13 @@ export default function ProtokollKopf() {
                         label="Name Mieter"
                         fullWidth
                         variant="standard"
+                        InputProps={{
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <Person/>
+                                </InputAdornment>
+                            ),
+                        }}
                     />
                 </Grid>
 
@@ -70,9 +113,17 @@ export default function ProtokollKopf() {
                         label="Neue Adresse"
                         fullWidth
                         variant="standard"
+                        size="small"
+                        InputProps={{
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <AddLocation/>
+                                </InputAdornment>
+                            ),
+                        }}
                     />
                 </Grid>
-                <Grid item xs={12} >
+                <Grid item xs={12}>
                     <TextField
                         required
                         id="email_mieter"
@@ -80,6 +131,14 @@ export default function ProtokollKopf() {
                         label="EMail Mieter"
                         fullWidth
                         variant="standard"
+                        size="small"
+                        InputProps={{
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <Email/>
+                                </InputAdornment>
+                            ),
+                        }}
                     />
                 </Grid>
                 <Grid item xs={12}>
@@ -89,10 +148,18 @@ export default function ProtokollKopf() {
                         label="Teilnehmer Vermieter"
                         fullWidth
                         variant="standard"
+                        ize="small"
+                        InputProps={{
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <Group/>
+                                </InputAdornment>
+                            ),
+                        }}
                     />
                 </Grid>
 
             </Grid>
-            </Paper>
+        </Paper>
     );
 }

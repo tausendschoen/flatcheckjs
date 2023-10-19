@@ -65,7 +65,6 @@ export default function Inventar(props) {
     }
 
     return (
-        <Paper elevation={0} style={{ padding: '2px', margin: '4px', border: '1px solid lightgrey'}}>
             <Grid container spacing={1} padding={1} width={"100%"} color={"black"} borderColor={'primary.main'}>
                 <Grid iten xs={12} sm={6}>
                     <TextField fullWidth={true}
@@ -75,7 +74,7 @@ export default function Inventar(props) {
                                InputProps={{
                                    readOnly: false,
                                }}
-                               size="small"
+                               size="medium"
                                onChange={handleInputChange}
                                value={label}
                                variant="standard"/>
@@ -98,6 +97,5 @@ export default function Inventar(props) {
                     </div>
                 </Grid>
             </Grid>
-        </Paper>
             );
 }

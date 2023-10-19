@@ -21,14 +21,16 @@ export default function Schluessel() {
                     Schlüssel
                 </Typography>
 
-                <Grid container spacing={3}>
+                <Grid container spacing={2}>
                     <Grid item xs={12} sm={6}>
                         <TextField
+                            variant="standard"
                             id="hausschluessel"
                             label="Hausschlüssel"
                             required={true}
                             fullWidth={true}
                             type="number"
+                            size="small"
                             InputLabelProps={{
                                 shrink: true,
                             }}
@@ -43,9 +45,11 @@ export default function Schluessel() {
                     </Grid>
                     <Grid item xs={12} sm={6}>
                         <TextField
+                            variant="standard"
                             id="wohnungschluessel"
                             label="Wohnungschlüssel"
                             required={true}
+                            size="small"
                             type="number"
                             fullWidth={true}
                             InputLabelProps={{
@@ -65,8 +69,10 @@ export default function Schluessel() {
                             id="briefkastenschluessel"
                             label="Briefkasten"
                             required={true}
+                            size="small"
                             type="number"
                             fullWidth={true}
+                            variant="standard"
                             InputLabelProps={{
                                 shrink: true,
                             }}
@@ -81,9 +87,10 @@ export default function Schluessel() {
                     </Grid>
                     <Grid item xs={12} sm={6}>
                         <TextField
-
+                            variant="standard"
                             id="hausanschlussschluessel"
                             label="Hausanschluss"
+                            size="small"
                             required={true}
                             type="number"
                             fullWidth={true}
