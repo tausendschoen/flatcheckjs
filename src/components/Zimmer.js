@@ -1,5 +1,5 @@
 import * as React from "react";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 
 import {FormControlLabel, FormGroup, InputAdornment, Switch} from "@mui/material";
 import Box from "@mui/material/Box";
@@ -15,73 +15,76 @@ import Button from "@mui/material/Button";
 import WebcamDialog from "./WebcamDialog";
 
 
-export const Inventar_Zimmer = ["Tür", "Türzarge", "Wand", "Boden", "Fußleisten", "Decke", "Steckdosen", "Schalter", "Heizung",
-    "Fenster"];
+// initialisiere Inventory
+function createInventoryObjectList( InventoryListe ) {
+    let idx=0;
+    return InventoryListe.map(element =>  ({idx: idx++, label: element, value: 0}) );
+}
 
-export const Inventar_Gäste_WC = [...Inventar_Zimmer, "WC-Sitz", "WC", "Spülkasten", "Waschbecken", "Wasserhahn", "Toilettenpapierhalter", "Spiegel"];
+export const Inventory_Zimmer = createInventoryObjectList(["Tür", "Türzarge", "Wand", "Boden", "Fußleisten", "Decke", "Steckdosen", "Schalter", "Heizung",
+    "Fenster"]);
 
-export const Inventar_WC = [...Inventar_Gäste_WC, "Duschtrennwand", "Duschvorhang", "Badewanne", "Badewannenarmatur"];
+export const Inventory_Gäste_WC =createInventoryObjectList( [...Inventory_Zimmer, "WC-Sitz", "WC", "Spülkasten", "Waschbecken", "Wasserhahn", "Toilettenpapierhalter", "Spiegel"]);
 
-export const Inventar_Balkon = ["Boden", "Decke", "Wände", "Glas", "Fenster", "Oberlicht"];
+export const Inventory_WC = createInventoryObjectList([...Inventory_Gäste_WC, "Duschtrennwand", "Duschvorhang", "Badewanne", "Badewannenarmatur"]);
 
-export const Inventar_Keller = ["Tür", "Boden", "Schalter", "Steckdose", "Fenster"];
+export const Inventory_Balkon = createInventoryObjectList(["Boden", "Decke", "Wände", "Glas", "Fenster", "Oberlicht"]);
+
+export const Inventory_Keller = createInventoryObjectList(["Tür", "Boden", "Schalter", "Steckdose", "Fenster"]);
+
+export const Inventory_Abstellraum = createInventoryObjectList(["Tür", "Türzarge", "Boden", "Fußleisten", "Decke", "Schalter", "Steckdose"]);
 
 
 /**
  *
- * @param props.inventarListe {[string]} Liste des Inventars in dem Zimmer
- *         Ein InventarElement hat die Attribute id, label, value
+ * @param props.InventoryListe {[string]} Liste des Inventorys in dem Zimmer
+ *         Ein InventoryElement hat die Attribute id, label, value
  * @return {JSX.Element}
  * @constructor
  */
 export default function Zimmer(props) {
 
-    const [inventar, setInventar] = React.useState([]);
-    // Darstellung des InventarDialogs
+    const [Inventory, setInventory] = React.useState(props.inventory);
+    // Darstellung des InventoryDialogs
     const [open, setOpen] = React.useState(true);
     const [showComment, setShowComment] = React.useState(false);
     const [showDialog, setShowDialog] = React.useState(false);
     const [images, setImages] = useState([]);
 
+    console.log(`Inventory....` + JSON.stringify(Inventory));
 
-    let inventarListe = props.inventarListe;
-
-    // initialisiere Inventar
-    useEffect(() => {
-            if (inventarListe.length > 0) {
-                let tmpInventar = [];
-                for (let i = 0; i < inventarListe.length; i++) {
-                    tmpInventar = tmpInventar.concat({label: inventarListe[i], value: 0, id: i});
-                }
-                setInventar(tmpInventar);
-            }
-        }
-        , []);
-
-    function containsInventar(label) {
-        console.log(`containsInventar ${label}`)
+    function containsInventory(label) {
+        console.log(`containsInventory ${label}`)
         let retValue = false;
-        for (let i in inventarListe) {
-            console.log(`compare ${i} ${inventarListe[i]}`);
-            if (inventarListe[i] === label)
+        for (let i in Inventory) {
+            console.log(`compare ${i} ${Inventory[i].label}`);
+            if (Inventory[i].label === label)
                 retValue = true;
         }
-        console.log(`containsInventar ${label} ${retValue}`)
+        console.log(`containsInventory ${label} ${retValue}`)
         return retValue;
     }
 
-    function addElement() {
-        let tmpInventar = [...inventar];
-        tmpInventar = tmpInventar.concat({id: tmpInventar.length, label: '', value: 0});
-        setInventar(tmpInventar);
+    function addInventory() {
+        let tmpInventory= [];
+        tmpInventory = tmpInventory.concat({id: tmpInventory.length, label: '', value: 0});
+        setInventory(tmpInventory);
     }
 
-    function setInventarValue(id, label, value) {
-        console.log(`setInventarValue: ${id}, ${label}, ${value},`);
-        let localList = [...inventar];
+    function removeInventory(idx) {
+        let tmpInventory = [...Inventory];
+        tmpInventory.splice(idx, 1);
+        console.log(`removeInventory: ${Inventory[idx].label} Neue Liste: ` + JSON.stringify(tmpInventory));
+
+        setInventory(tmpInventory);
+    }
+
+
+    function setInventoryValue(id, label, value) {
+        console.log(`setInventoryValue: ${id}, ${label}, ${value},`);
+        let localList = [...Inventory];
         localList[id] = {label: label, value: value};
-        localList[id] = {label, value};
-        setInventar(localList);
+        setInventory(localList);
     }
 
     function handleFoldComponent() {
@@ -158,22 +161,19 @@ export default function Zimmer(props) {
                         <FormGroup><FormControlLabel control={<Switch/>}
                                                      label="Schlüssel"/></FormGroup>
                     </Grid>
-
-                    <Grid item xs={12} md={12} >
-                        {inventar.map((element, index) => {
-                        return (
-                        <Inventar id={index} label={element.label} set={setInventarValue}
-                        checkFunction={containsInventar}/>
-                        )
-                    })
+                    <Grid item xs={12} sx={{p:0, m:0}}>
+                        {Inventory.map((element) => {
+                        return (<Inventar key={element.idx} idx={element.idx} label={element.label} set={setInventoryValue}
+                                          removeFnc={removeInventory} checkFunction={containsInventory}/> )
+                                                    })
                         }
                     </Grid>
                 </Grid>
 
                 <Box sx={{m: 1}}>
                     <Button startIcon={<AddCircle/>} sx={{marginRight: 1}}
-                            onClick={addElement}>
-                        Inventar
+                            onClick={addInventory}>
+                        Inventory
                     </Button>
                     <Button startIcon={<EditNote/>} sx={{marginRight: 1}}
                             onClick={() => setShowComment(!showComment)}>

@@ -1,11 +1,12 @@
 import {Rating} from "@mui/material";
-import {FiberManualRecord} from "@mui/icons-material";
+import {Delete, FiberManualRecord, Remove} from "@mui/icons-material";
 import TextField from "@mui/material/TextField";
 import * as React from "react";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
+import IconButton from "@mui/material/IconButton";
 
 const labels = {
     1: 'defekt', 2: 'stark gebraucht', 3: 'gebraucht', 4: 'neuwertig', 5: 'neu',
@@ -34,7 +35,13 @@ const commonStyles = {
     width: '100%',
 };
 
-
+/**
+ *
+ * @returns {JSX.Element}
+ * @constructor
+ * @param {string} props.label - Der Name des Inventar
+ * @param {number} props.idx - Der Index der Inventar in der übergeordneten Lister
+ */
 export default function Inventar(props) {
 
     const [value, setValue] = React.useState(0);
@@ -65,8 +72,12 @@ export default function Inventar(props) {
     }
 
     return (
-            <Grid container spacing={1} padding={1} width={"100%"} color={"black"} borderColor={'primary.main'}>
+            <Grid container spacing={1} sx={{paddingTop: 1}} width={"100%"} color={"black"} borderColor={'primary.main'}>
                 <Grid iten xs={12} sm={6}>
+                    <div style={{ display: 'flex', alignItems: 'center', paddingLeft: '0px' }}>
+                    <IconButton aria-label="delete" color="primary" onClick={() => props.removeFnc(props.idx)}>
+                        <Delete/>
+                    </IconButton>
                     <TextField fullWidth={true}
                                sx={{paddingTop: 1, paddingLeft: 1}}
                                error={Boolean(error)}
@@ -78,9 +89,10 @@ export default function Inventar(props) {
                                onChange={handleInputChange}
                                value={label}
                                variant="standard"/>
+                    </div>
                 </Grid>
 
-                <Grid item xs={12} sm={6} >
+                <Grid item xs={12} sm={4} >
                     <div style={{ display: 'flex', alignItems: 'center', paddingLeft: '0px' }}>
                     <Rating
                         name="hover-feedback"
