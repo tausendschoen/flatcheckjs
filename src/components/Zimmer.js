@@ -133,7 +133,7 @@ export default function Zimmer(props) {
                     <Grid item xs={11}>
                         <Typography variant="h6">{props.name} (nicht relevant)</Typography>
                     </Grid>
-                    <Grid item xs={1}>
+                    <Grid item xs={1} spacing={"10px"}>
                         <IconButton color="primary" onClick={handleFoldComponent}><Visibility/></IconButton>
                     </Grid>
                 </Grid>
