@@ -13,9 +13,8 @@ const ImageGrid = (props) => {
         // Wenn sich die Fenstergröße ändert, berechnen Sie die Anzahl der Bilder pro Zeile basierend auf der Fensterbreite.
         const handleResize = () => {
             const grid = gridRef.current;
-            // const containerWidth = grid.offsetWidth;
-            const minImageSize = 400; // Mindestgröße für Bilder
-            // const minImagesPerRow = Math.floor(containerWidth / minImageSize);
+            const containerWidth = grid.offsetWidth;
+            const minImageSize = 300; // Mindestplec  // const minImagesPerRow = Math.floor(containerWidth / minImageSize);
             grid.style.gridTemplateColumns = `repeat(auto-fit, minmax(${minImageSize}px, 1fr))`;
         };
 
@@ -38,8 +37,8 @@ const ImageGrid = (props) => {
                 }}
             >
                 {images.map((image, index) => (
-                    <div key={index} style={{ display: "flex", position: "center"  }}>
-                        <img src={image} alt={`Bild ${index}`} style={{ width: "100%" }} />
+                    <div key={index} style={{ display: "flex", position: "center", justifyContent: "center"  }}>
+                        <img src={image} alt={`Bild ${index}`} style={{ width: "100%", margin: "10px" }} />
                         <button
                             onClick={() => deleteImageFnc(index)}
                             style={{
