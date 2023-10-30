@@ -38,7 +38,7 @@ const ImageGrid = (props) => {
                 }}
             >
                 {images.map((image, index) => (
-                    <div key={index} style={{ position: "relative" }}>
+                    <div key={index} style={{ display: "flex", position: "center"  }}>
                         <img src={image} alt={`Bild ${index}`} style={{ width: "100%" }} />
                         <button
                             onClick={() => deleteImageFnc(index)}

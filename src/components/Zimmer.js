@@ -22,12 +22,13 @@ function createInventoryObjectList(InventoryListe) {
     return InventoryListe.map(element => ({idx: idx++, label: element, value: 0}));
 }
 
+
 export const Inventory_Zimmer = createInventoryObjectList(["Tür", "Türzarge", "Wand", "Boden", "Fußleisten", "Decke", "Steckdosen", "Schalter", "Heizung",
     "Fenster"]);
 
-export const Inventory_Gäste_WC = createInventoryObjectList([...Inventory_Zimmer, "WC-Sitz", "WC", "Spülkasten", "Waschbecken", "Wasserhahn", "Toilettenpapierhalter", "Spiegel"]);
+export const Inventory_Gäste_WC = [...Inventory_Zimmer, ...createInventoryObjectList( ["WC-Sitz", "WC", "Spülkasten", "Waschbecken", "Wasserhahn", "Toilettenpapierhalter", "Spiegel"] ) ];
 
-export const Inventory_WC = createInventoryObjectList([...Inventory_Gäste_WC, "Duschtrennwand", "Duschvorhang", "Badewanne", "Badewannenarmatur"]);
+export const Inventory_WC = [...Inventory_Zimmer, ...createInventoryObjectList( ["Duschtrennwand", "Duschvorhang", "Badewanne", "Badewannenarmatur"])];
 
 export const Inventory_Balkon = createInventoryObjectList(["Boden", "Decke", "Wände", "Glas", "Fenster", "Oberlicht"]);
 
