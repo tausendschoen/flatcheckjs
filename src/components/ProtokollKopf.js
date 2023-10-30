@@ -16,8 +16,27 @@ import {
     Place
 } from "@mui/icons-material";
 
+import {HeaderContext, HeaderDispatchContext} from "./HeaderContext";
+import {useContext, useState} from "react";
+import {getCurrentDate, getCurrentDateTime} from "./helperFunctions";
+
+
 export default function ProtokollKopf() {
+
+    const headerContext = useContext(HeaderContext);
+    const dispatch = useContext(HeaderDispatchContext);
+    const [dateTime, setDateTime] = useState(getCurrentDate());
+
+    function setValue( event, type ) {
+        if( type === "mieter" )
+            dispatch({action: "mieter", value: event.target.value})
+        else
+            dispatch({action: "vermieter", value: event.target.value})
+    }
+
+
     return (
+
         <Paper sx={{
             p: 1,
             m: 1,
@@ -57,6 +76,8 @@ export default function ProtokollKopf() {
                         id="datum"
                         name="Datum"
                         label="Datum"
+                        type={"date"}
+                        value={dateTime}
                         fullWidth
                         variant="standard"
                         InputProps={{
@@ -94,6 +115,7 @@ export default function ProtokollKopf() {
                         name="mietername"
                         label="Name Mieter"
                         fullWidth
+                        onChange={ (e) => setValue(e, "mieter") }
                         variant="standard"
                         InputProps={{
                             startAdornment: (
@@ -148,6 +170,7 @@ export default function ProtokollKopf() {
                         label="Teilnehmer Vermieter"
                         fullWidth
                         variant="standard"
+                        onChange={ (e) => setValue(e, "vermieter") }
                         ize="small"
                         InputProps={{
                             startAdornment: (

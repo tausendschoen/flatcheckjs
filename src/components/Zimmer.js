@@ -13,18 +13,19 @@ import ImageGrid from "./ImageGrid";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import WebcamDialog from "./WebcamDialog";
+import CircularProgressWithLabel from "./Circular";
 
 
 // initialisiere Inventory
-function createInventoryObjectList( InventoryListe ) {
-    let idx=0;
-    return InventoryListe.map(element =>  ({idx: idx++, label: element, value: 0}) );
+function createInventoryObjectList(InventoryListe) {
+    let idx = 0;
+    return InventoryListe.map(element => ({idx: idx++, label: element, value: 0}));
 }
 
 export const Inventory_Zimmer = createInventoryObjectList(["Tür", "Türzarge", "Wand", "Boden", "Fußleisten", "Decke", "Steckdosen", "Schalter", "Heizung",
     "Fenster"]);
 
-export const Inventory_Gäste_WC =createInventoryObjectList( [...Inventory_Zimmer, "WC-Sitz", "WC", "Spülkasten", "Waschbecken", "Wasserhahn", "Toilettenpapierhalter", "Spiegel"]);
+export const Inventory_Gäste_WC = createInventoryObjectList([...Inventory_Zimmer, "WC-Sitz", "WC", "Spülkasten", "Waschbecken", "Wasserhahn", "Toilettenpapierhalter", "Spiegel"]);
 
 export const Inventory_WC = createInventoryObjectList([...Inventory_Gäste_WC, "Duschtrennwand", "Duschvorhang", "Badewanne", "Badewannenarmatur"]);
 
@@ -51,7 +52,19 @@ export default function Zimmer(props) {
     const [showDialog, setShowDialog] = React.useState(false);
     const [images, setImages] = useState([]);
 
+
     console.log(`Inventory....` + JSON.stringify(Inventory));
+
+/* wird ev. genutzt um zu prüfen ob alle Werte gesetzt sind
+    function fillState() {
+        let elements = Inventory.length;
+        let count = 0;
+        for( let item in Inventory ) {
+            count += item.
+        }
+    }
+    // <div style={{ marginRight: '10px' }}> <CircularProgressWithLabel value="0"/></div>
+  */
 
     function containsInventory(label) {
         console.log(`containsInventory ${label}`)
@@ -66,7 +79,7 @@ export default function Zimmer(props) {
     }
 
     function addInventory() {
-        let tmpInventory= [];
+        let tmpInventory = [...Inventory];
         tmpInventory = tmpInventory.concat({id: tmpInventory.length, label: '', value: 0});
         setInventory(tmpInventory);
     }
@@ -116,7 +129,9 @@ export default function Zimmer(props) {
                 elevation: "2",
             }}>
                 <Grid container spacing={1} paddingLeft={1}>
-                    <Grid item xs={11}> <Typography variant="h6">{props.name} (nicht relevant)</Typography></Grid>
+                    <Grid item xs={11}>
+                        <Typography variant="h6">{props.name} (nicht relevant)</Typography>
+                    </Grid>
                     <Grid item xs={1}>
                         <IconButton color="primary" onClick={handleFoldComponent}><Visibility/></IconButton>
                     </Grid>
@@ -136,9 +151,13 @@ export default function Zimmer(props) {
             }}>
 
                 <Grid container spacing={1} paddingLeft={1} alignItems="center">
-                    <Grid item xs={11}> <Typography variant="h6">{props.name}</Typography></Grid>
+                    <Grid item xs={11}>
+                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                           <Typography variant="h6">{props.name}</Typography>
+                        </div>
+                    </Grid>
                     <Grid item xs={1}>
-                        <IconButton color="primary" onClick={handleFoldComponent}><VisibilityOff/></IconButton>
+                        <IconButton sx={{marginRight: '2'}} color="primary" onClick={handleFoldComponent}><VisibilityOff/></IconButton>
                     </Grid>
                     <Grid item xs={12} md={8}>
                         <TextField id="heizungszähler" label="Heizungszähler" required={true}
@@ -161,11 +180,12 @@ export default function Zimmer(props) {
                         <FormGroup><FormControlLabel control={<Switch/>}
                                                      label="Schlüssel"/></FormGroup>
                     </Grid>
-                    <Grid item xs={12} sx={{p:0, m:0}}>
+                    <Grid item xs={12} sx={{p: 0, m: 0}}>
                         {Inventory.map((element) => {
-                        return (<Inventar key={element.idx} idx={element.idx} label={element.label} set={setInventoryValue}
-                                          removeFnc={removeInventory} checkFunction={containsInventory}/> )
-                                                    })
+                            return (<Inventar key={element.idx} idx={element.idx} label={element.label}
+                                              set={setInventoryValue}
+                                              removeFnc={removeInventory} checkFunction={containsInventory}/>)
+                        })
                         }
                     </Grid>
                 </Grid>
@@ -173,17 +193,16 @@ export default function Zimmer(props) {
                 <Box sx={{m: 1}}>
                     <Button startIcon={<AddCircle/>} sx={{marginRight: 1}}
                             onClick={addInventory}>
-                        Inventory
+                        Inventar
                     </Button>
                     <Button startIcon={<EditNote/>} sx={{marginRight: 1}}
                             onClick={() => setShowComment(!showComment)}>
                         Hinweise
                     </Button>
                     <Button onClick={() => {
-                        setShowDialog(true)
-                    }}
-                            startIcon={<Camera/>}
-                    > Fotos </Button>
+                                        setShowDialog(true)
+                                    }}
+                            startIcon={<Camera/>}> Fotos </Button>
                 </Box>
                 <Box sx={{m: 1}}>
                     {showComment && (<TextField fullWidth multiline rows={3} label="Hinweistext"></TextField>)}

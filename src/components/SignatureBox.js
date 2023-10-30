@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import SignatureCanvas from "react-signature-canvas";
 
 
-export default function SignatureBox() {
+export default function SignatureBox(props) {
 
     const sigRef = useRef();
     // const [signature, setSignature] = useState(null);
@@ -36,7 +36,8 @@ export default function SignatureBox() {
                     <SignatureCanvas
                         penColor="black"
                         ref={sigRef}
-                        canvasProps={{height: "200px", border: "1px solid black", color: "blue"}}
+                        clearOnResize={false}
+                        canvasProps={{height: 300, className: 'sigCanvas'}}
                         onEnd={handleSignatureEnd}
                     />
                 </Paper>
@@ -46,7 +47,7 @@ export default function SignatureBox() {
                         <DeleteOutline onClick={clearSignature}/>
                     </IconButton>
                     <Typography variant="body1" gutterBottom sx={{paddingTop: "0.5em"}}>
-                        Unterschrift Mieter
+                        {props.title}
                     </Typography>
                 </div>
             </Grid>

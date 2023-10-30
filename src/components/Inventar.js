@@ -72,7 +72,7 @@ export default function Inventar(props) {
     }
 
     return (
-            <Grid container spacing={1} sx={{paddingTop: 1}} width={"100%"} color={"black"} borderColor={'primary.main'}>
+            <Grid container spacing={1} sx={{paddingTop: 1}} color={"black"} borderColor={'primary.main'}>
                 <Grid iten xs={12} sm={6}>
                     <div style={{ display: 'flex', alignItems: 'center', paddingLeft: '0px' }}>
                     <IconButton aria-label="delete" color="primary" onClick={() => props.removeFnc(props.idx)}>
