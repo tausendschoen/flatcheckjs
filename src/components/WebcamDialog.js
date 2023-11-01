@@ -8,18 +8,28 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import Grid from "@mui/material/Grid";
-import {Cameraswitch} from "@mui/icons-material";
+import {Cameraswitch, NoPhotography} from "@mui/icons-material";
+import IconBox from "./IconBox";
 
 const WebcamDialog = ({ open = true, onClose, onCapture }) => {
 
 
     const webcamRef = useRef(null);
     const [selectedCamera, setSelectedCamera] = useState('');
+    const [buttonDisabled, setButtonDisabled] = useState(false);
     const [cameras, setCameras] = useState([]);
 
     const handleCapture = () => {
-        const imageSrc = webcamRef.current.getScreenshot();
-        onCapture(imageSrc);
+        setButtonDisabled(true);
+
+        try {
+            const imageSrc = webcamRef.current.getScreenshot();
+            onCapture(imageSrc);
+        }catch (e) {}
+
+        setTimeout(() => {
+            setButtonDisabled(false); // Aktiviere den Button nach 0,5 Sekunden
+        }, 500);
     };
 
     const handleCameraSwitch = () => {
@@ -49,6 +59,7 @@ const WebcamDialog = ({ open = true, onClose, onCapture }) => {
                     console.log(`Camera selected ${deviceIds[0]}`);
                 }
 
+
             } catch (error) {
                 console.error("Fehler beim Abrufen der Kameras:", error);
             }
@@ -59,13 +70,31 @@ const WebcamDialog = ({ open = true, onClose, onCapture }) => {
         }
     }, []);
 
+    let cameraWindow;
+    if( selectedCamera ) {
+        cameraWindow =  <Webcam
+            audio={false}
+            ref={webcamRef}
+            screenshotFormat="image/jpeg"
+            videoConstraints={{
+                deviceId: selectedCamera,
+            }}
+            style={{width: "100%", height: "400px"}}
+            />;
+    }
+    else {
+        if( !buttonDisabled)
+            setButtonDisabled(true);
+         cameraWindow = <IconBox icon={<NoPhotography sx={{ fontSize: 40 }}/>} />;
+    }
+
 
 
     console.log(`WebcamDialog render ${open} selected '${selectedCamera}' Kameras ${cameras.length}`);
 
     return (
-        <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth>
-            <DialogContent>
+        <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth sx={{m:"0", p:"0"}}>
+            <DialogContent sx={{m: "0", p: "0"}}>
                 <Grid container spacing={1} padding={1} width={"100%"}>
                     <Grid iten xs={6}>
                         {cameras.length > 1 && (
@@ -80,8 +109,8 @@ const WebcamDialog = ({ open = true, onClose, onCapture }) => {
                         </div>
                             )}
                     </Grid>
-                    <Grid iten xs={6} alignItems={"right"}>
-                        <div style={{display: "flex", justifyContent: "right", width: "100%"}}>
+                    <Grid iten xs={6} alignItems={"right"} margin={"0"}>
+                        <div style={{display: "flex", justifyContent: "right"}}>
                             <IconButton
                                 edge="end"
                                 color="inherit"
@@ -92,25 +121,18 @@ const WebcamDialog = ({ open = true, onClose, onCapture }) => {
                         </div>
                     </Grid>
                 </Grid>
-                {selectedCamera && (
-                    <Webcam
-                        audio={false}
-                        ref={webcamRef}
-                        screenshotFormat="image/jpeg"
-                        videoConstraints={{
-                            deviceId: selectedCamera,
-                        }}
-                        style={{width: "100%"}}
-                    />
-                )}
+                <div style={{display: "flex", justifyContent: "center"}}>
+                    {cameraWindow}
+                </div>
             </DialogContent>
-            <DialogActions>
+            <DialogActions sx={{m: "0", p: "0 1 0 0"}}>
                 <div style={{display: "flex", justifyContent: "center", width: "100%"}}>
                     <Button
                         onClick={handleCapture}
                         variant="contained"
+
                         color="primary"
-                        disabled={!selectedCamera}
+                        disabled={!selectedCamera && buttonDisabled}
                         startIcon={<PhotoCameraIcon/>}
                     >
                         Aufnehmen

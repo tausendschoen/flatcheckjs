@@ -1,26 +1,22 @@
-
 import React, {useContext} from "react";
-import Grid from "@mui/material/Grid";
 import SignatureBox from "./SignatureBox";
 import {HeaderContext} from "./HeaderContext";
 
 
-
-export default function Signature(props) {
+export default function Signature() {
 
     const headerContextData = useContext(HeaderContext);
 
     return (
 
-        <Grid container spacing={3} >
-            <Grid item xs={12} md={6} width="100%" >
-                   <SignatureBox title={"Unterschrift Mieter "+ headerContextData.mieter} />
-            </Grid>
+        <div className={"page-break"} style={{display: 'flex', alignItems: 'center',
+            flexWrap: 'wrap',
+            justifyContent: 'center', margin: "10px"}}>
 
-            <Grid item xs={12} md={6}>
-                <SignatureBox title={"Unterschrift Vermieter "+ headerContextData.vermieter} />
-            </Grid>
-        </Grid>
+            <SignatureBox id={1} title={"Unterschrift Mieter " + headerContextData.mieter}/>
+            <SignatureBox id={2} title={"Unterschrift Vermieter " + headerContextData.vermieter}/>
+
+        </div>
 
     )
 };

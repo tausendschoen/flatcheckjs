@@ -13,7 +13,6 @@ import ImageGrid from "./ImageGrid";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import WebcamDialog from "./WebcamDialog";
-import CircularProgressWithLabel from "./Circular";
 
 
 // initialisiere Inventory
@@ -121,7 +120,9 @@ export default function Zimmer(props) {
 
     if (open === false)
         return (
-            <Paper sx={{
+            <Paper
+                className={"page-break"}
+                sx={{
                 p: 1,
                 m: 1,
                 display: 'flex',
@@ -138,11 +139,12 @@ export default function Zimmer(props) {
                     </Grid>
                 </Grid>
             </Paper>
-
         )
     else
         return (
-            <Paper sx={{
+            <Paper
+                className={"page-break"}
+                sx={{
                 p: 1,
                 m: 1,
                 display: 'flex',
@@ -213,7 +215,6 @@ export default function Zimmer(props) {
                 {Boolean(images) && (<ImageGrid images={images} deleteFunction={deleteImage}/>)}
 
             </Paper>
-
         );
 
 }
