@@ -51,8 +51,8 @@ export default function ButtonAppBar(props) {
                             'aria-labelledby': 'basic-button',
                         }}
                     >
-                        <MenuItem onClick={(e) => setHelpDialog(true)}>Hilfe</MenuItem>
-                        <MenuItem onClick={(e) => setAboutDialog(true)}>Über diese App</MenuItem>
+                        <MenuItem onClick={(e) => {setOpen(false); setHelpDialog(true) }}>Hilfe</MenuItem>
+                        <MenuItem onClick={(e) => {setOpen(false); setAboutDialog(true)}}>Über diese App</MenuItem>
                     </Menu>
 
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
