@@ -6,22 +6,27 @@ import Typography from '@mui/material/Typography';
 import IconButton from "@mui/material/IconButton";
 import {Menu, MenuItem} from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
+import {AppVersion} from "./appVersion";
+import AboutDialog from "../dialog/AboutDialog";
+import HelpDialog from "../dialog/HelpDialog";
 
-const version = "0.1.12";
 
 export default function ButtonAppBar(props) {
 
     const [open, setOpen] = React.useState(false);
     const [anchorEl, setAnchorEl] = React.useState( null );
+    const [aboutDialog, setAboutDialog] = React.useState( false );
+    const [helpDialog, setHelpDialog] = React.useState( false );
 
-    const handleClick = (event) => {
+    function handleOpenMenuItem(event, item) {
         setOpen(true);
         setAnchorEl(event.currentTarget);
-    };
-    const handleClose = () => {
+    }
+
+    function handleCloseMenuItem(event, item) {
         setOpen(false);
         setAnchorEl(null);
-    };
+    }
 
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -33,7 +38,7 @@ export default function ButtonAppBar(props) {
                         color="inherit"
                         aria-label="menu"
                         sx={{ mr: 2 }}
-                        onClick={handleClick}
+                        onClick={(e) => handleOpenMenuItem(e, 1)}
                     >
                         <MenuIcon/>
                     </IconButton>
@@ -41,12 +46,13 @@ export default function ButtonAppBar(props) {
                         id="basic-menu"
                         anchorEl={anchorEl}
                         open={open}
-                        onClose={handleClose}
+                        onClose={(e) => handleCloseMenuItem(e, 1)}
                         MenuListProps={{
                             'aria-labelledby': 'basic-button',
                         }}
                     >
-                        <MenuItem onClick={handleClose}>Version {version}</MenuItem>
+                        <MenuItem onClick={(e) => setHelpDialog(true)}>Hilfe</MenuItem>
+                        <MenuItem onClick={(e) => setAboutDialog(true)}>Über diese App</MenuItem>
                     </Menu>
 
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
@@ -54,6 +60,8 @@ export default function ButtonAppBar(props) {
                     </Typography>
                 </Toolbar>
             </AppBar>
+            {aboutDialog && (<AboutDialog closeFunction={() => setAboutDialog(false)}/>)}
+            {helpDialog && (<HelpDialog closeFunction={() => setHelpDialog(false)}/>)}
         </Box>
     );
 }

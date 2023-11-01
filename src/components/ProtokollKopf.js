@@ -1,6 +1,6 @@
-import * as React from 'react';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
+import React, { useEffect } from 'react';
 import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
 import {InputAdornment} from "@mui/material";
@@ -23,17 +23,12 @@ import {getCurrentDate, getCurrentDateTime} from "./helperFunctions";
 
 export default function ProtokollKopf() {
 
-    const headerContext = useContext(HeaderContext);
     const dispatch = useContext(HeaderDispatchContext);
     const [dateTime, setDateTime] = useState(getCurrentDate());
 
-    function setValue( event, type ) {
-        if( type === "mieter" )
-            dispatch({action: "mieter", value: event.target.value})
-        else
-            dispatch({action: "vermieter", value: event.target.value})
+    function changeTitle(event) {
+        document.title = "Protokoll-" + dateTime + "-" + event.target.value;
     }
-
 
     return (
 
@@ -60,6 +55,8 @@ export default function ProtokollKopf() {
                         fullWidth
                         autoComplete="given-name"
                         variant="standard"
+                        onChange={(e) => {changeTitle(e)}}
+
                         InputProps={{
                             startAdornment: (
                                 <InputAdornment position="start">
@@ -115,7 +112,7 @@ export default function ProtokollKopf() {
                         name="mietername"
                         label="Name Mieter"
                         fullWidth
-                        onChange={ (e) => setValue(e, "mieter") }
+                        onChange={ (e) => {dispatch({action: "mieter", value: e.target.value})}}
                         variant="standard"
                         InputProps={{
                             startAdornment: (
@@ -151,6 +148,7 @@ export default function ProtokollKopf() {
                         id="email_mieter"
                         name="email_mieter"
                         label="EMail Mieter"
+                        onChange={ (e) => {dispatch({action: "mieterEmail", value: e.target.value})}}
                         fullWidth
                         variant="standard"
                         size="small"
@@ -170,7 +168,7 @@ export default function ProtokollKopf() {
                         label="Teilnehmer Vermieter"
                         fullWidth
                         variant="standard"
-                        onChange={ (e) => setValue(e, "vermieter") }
+                        onChange={ (e) => {dispatch({action: "vermieter", value: e.target.value})}}
                         ize="small"
                         InputProps={{
                             startAdornment: (

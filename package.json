@@ -1,6 +1,6 @@
 {
   "name": "wohnungsbegehung",
-  "version": "0.1.12",
+  "version": "0.1.14",
   "homepage": "https://tausendschoen.github.io/flatcheckjs",
   "private": true,
   "dependencies": {
@@ -29,6 +29,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",
+    "prebuild": "node updateVersion.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
