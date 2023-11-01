@@ -1,6 +1,6 @@
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import React, { useEffect } from 'react';
+import React from 'react';
 import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
 import {InputAdornment} from "@mui/material";
@@ -16,7 +16,7 @@ import {
     Place
 } from "@mui/icons-material";
 
-import {HeaderContext, HeaderDispatchContext} from "./HeaderContext";
+import {HeaderDispatchContext} from "./HeaderContext";
 import {useContext, useState} from "react";
 import {getCurrentDate, getCurrentDateTime} from "./helperFunctions";
 
@@ -25,11 +25,13 @@ export default function ProtokollKopf() {
 
     const dispatch = useContext(HeaderDispatchContext);
     const [dateTime, setDateTime] = useState(getCurrentDate());
+    const [appartmentName, setAppartmentName] = useState("");
 
-    function changeTitle(event) {
-        document.title = "Protokoll-" + dateTime + "-" + event.target.value;
-    }
-
+    console.log("A: '" + appartmentName + "'");
+    if( appartmentName !== "")
+        document.title = "Protokoll-" + dateTime + "-" + appartmentName;
+    else
+        document.title = "Protokoll-" + dateTime;
     return (
 
         <Paper sx={{
@@ -55,7 +57,7 @@ export default function ProtokollKopf() {
                         fullWidth
                         autoComplete="given-name"
                         variant="standard"
-                        onChange={(e) => {changeTitle(e)}}
+                        onChange={(e) => {setAppartmentName(e.target.value)}}
 
                         InputProps={{
                             startAdornment: (
