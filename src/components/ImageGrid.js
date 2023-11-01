@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef } from "react";
-import WebcamDialog from "./WebcamDialog"; // Importieren Sie Ihre Webcam-Dialog-Komponente hier
+import React, {useEffect, useRef} from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
+import Typography from "@mui/material/Typography";
 
 const ImageGrid = (props) => {
 
@@ -28,6 +28,20 @@ const ImageGrid = (props) => {
 
 
     return (
+        <>
+            {images.length > 0 && (
+                <div
+                    className={"page-break"}
+                    style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    margin: "10px"
+                }}>
+                    <Typography variant="subtitle1" component="div" sx={{flexGrow: 1}}>Fotos {props.title}</Typography>
+                </div>
+            )}
 
             <div
                 ref={gridRef}
@@ -36,9 +50,11 @@ const ImageGrid = (props) => {
                     gap: "10px",
                 }}
             >
+
                 {images.map((image, index) => (
-                    <div key={index} style={{ display: "flex", position: "center", justifyContent: "center"  }}>
-                        <img src={image} alt={`Bild ${index}`} style={{ width: "100%", margin: "10px" }} />
+                    <div className={ (index+1) % 7 ? "" : "page-break"} key={index}
+                         style={{display: "flex", position: "center", justifyContent: "center"}}>
+                        <img src={image} alt={`Bild ${index}`} style={{width: "100%", margin: "10px"}}/>
                         <button
                             onClick={() => deleteImageFnc(index)}
                             style={{
@@ -50,11 +66,12 @@ const ImageGrid = (props) => {
                                 borderRadius: "50%",
                             }}
                         >
-                            <DeleteIcon style={{ color: "blue" }} />
+                            <DeleteIcon style={{color: "blue"}}/>
                         </button>
                     </div>
                 ))}
             </div>
+        </>
     );
 };
 

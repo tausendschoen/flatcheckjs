@@ -212,7 +212,7 @@ export default function Zimmer(props) {
                 </Box>
 
                 {showDialog && (<WebcamDialog onClose={() => setShowDialog(false)} onCapture={handleCapture}/>)}
-                {Boolean(images) && (<ImageGrid images={images} deleteFunction={deleteImage}/>)}
+                {Boolean(images) && (<ImageGrid title={props.name} images={images} deleteFunction={deleteImage}/>)}
 
             </Paper>
         );

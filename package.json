@@ -1,6 +1,6 @@
 {
   "name": "wohnungsbegehung",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "homepage": "https://tausendschoen.github.io/flatcheckjs",
   "private": true,
   "dependencies": {
@@ -11,14 +11,13 @@
     "@mui/icons-material": "^5.14.3",
     "@mui/material": "^5.14.4",
     "@mui/styled-engine-sc": "^5.12.0",
-    "@mui/styles": "^5.14.13",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "fs": "^0.0.1-security",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-scripts": "^2.1.3",
+    "react-scripts": "^5.0.1",
     "react-signature-canvas": "^1.0.6",
     "react-to-print": "^2.14.13",
     "react-webcam": "^7.1.1",
@@ -40,7 +39,7 @@
     ]
   },
   "browserslist": {
-    "production": [
+    "productinon": [
       ">0.2%",
       "not dead",
       "not op_mini all"
