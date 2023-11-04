@@ -135,7 +135,7 @@ export default function Zimmer(props) {
             <Grid container spacing={1} paddingLeft={1} alignItems="center">
                 <Grid item xs={11}>
                     <div style={{display: 'flex', alignItems: 'center'}}>
-                        <TextField id="heizungszähler" label="Zimmername"
+                        <TextField id="zimmername" label="Zimmer"
                                    defaultValue={props.name}
                                    required={true}
                                    fullWidth={true} type="text"
