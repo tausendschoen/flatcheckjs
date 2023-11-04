@@ -12,13 +12,14 @@ import {
     Email,
     Gradient,
     Group,
-    Person,
+    Person, Phone,
     Place
 } from "@mui/icons-material";
 
 import {HeaderDispatchContext} from "./HeaderContext";
 import {useContext, useState} from "react";
 import {getCurrentDate, getCurrentDateTime} from "./helperFunctions";
+import EmailInput from "./EMailInput";
 
 
 export default function ProtokollKopf() {
@@ -131,7 +132,7 @@ export default function ProtokollKopf() {
                         required
                         id="neueAdresse"
                         name="neueAdresse"
-                        label="Neue Adresse"
+                        label="Neue Adresse Mieter"
                         fullWidth
                         variant="standard"
                         size="small"
@@ -144,8 +145,8 @@ export default function ProtokollKopf() {
                         }}
                     />
                 </Grid>
-                <Grid item xs={12}>
-                    <TextField
+                <Grid item xs={12} md={6}>
+                    <EmailInput
                         required
                         id="email_mieter"
                         name="email_mieter"
@@ -163,6 +164,24 @@ export default function ProtokollKopf() {
                         }}
                     />
                 </Grid>
+                <Grid item xs={12} md={6}>
+                    <TextField
+                        required
+                        id="telefon"
+                        name="telefon"
+                        label="Telefon Mieter"
+                        fullWidth
+                        variant="standard"
+                        size="small"
+                        InputProps={{
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <Phone/>
+                                </InputAdornment>
+                            ),
+                        }}
+                    />
+                </Grid>
                 <Grid item xs={12}>
                     <TextField
                         id="teilneherVermieter"
@@ -171,7 +190,7 @@ export default function ProtokollKopf() {
                         fullWidth
                         variant="standard"
                         onChange={ (e) => {dispatch({action: "vermieter", value: e.target.value})}}
-                        ize="small"
+                        size="small"
                         InputProps={{
                             startAdornment: (
                                 <InputAdornment position="start">
