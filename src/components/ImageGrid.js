@@ -7,6 +7,7 @@ const ImageGrid = (props) => {
     const images = props.images;
     const deleteImageFnc = props.deleteFunction;
     const imagesPerRow = 3; // Anzahl der Bilder pro Zeile
+    const imagesPerPage = imagesPerRow * 2;
 
     const gridRef = useRef(null);
 
@@ -48,13 +49,14 @@ const ImageGrid = (props) => {
             <div
                 ref={gridRef}
                 style={{
+                    paddingTop: "10px",
                     display: "grid",
                     gap: "10px",
                 }}
             >
+
                 {images.map((image, index) => (
-                    <div className={ (index+1) % 7 ? "" : "page-break"}
-                         key={index}
+                    <div key={index}
                          style={{position: "relative", justifyContent: "center", margin: "5px"}}>
                         <img src={image} alt={`Bild ${index}`} style={{width: "100%"}}/>
                         <button
