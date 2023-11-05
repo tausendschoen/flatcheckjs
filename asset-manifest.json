@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/flatcheckjs/static/css/main.f4f4ffa6.css",
-    "main.js": "/flatcheckjs/static/js/main.18eb29f7.js",
+    "main.js": "/flatcheckjs/static/js/main.c642165d.js",
     "index.html": "/flatcheckjs/index.html",
     "main.f4f4ffa6.css.map": "/flatcheckjs/static/css/main.f4f4ffa6.css.map",
-    "main.18eb29f7.js.map": "/flatcheckjs/static/js/main.18eb29f7.js.map"
+    "main.c642165d.js.map": "/flatcheckjs/static/js/main.c642165d.js.map"
   },
   "entrypoints": [
     "static/css/main.f4f4ffa6.css",
-    "static/js/main.18eb29f7.js"
+    "static/js/main.c642165d.js"
   ]
 }
