@@ -28,6 +28,12 @@ export default function ProtokollKopf() {
     const [dateTime, setDateTime] = useState(getCurrentDate());
     const [appartmentName, setAppartmentName] = useState("");
 
+
+    const handleDateChange = (event) => {
+        const selectedDate = event.target.value;
+        setDateTime(selectedDate);
+    };
+
     console.log("A: '" + appartmentName + "'");
     if( appartmentName !== "")
         document.title = "Protokoll-" + dateTime + "-" + appartmentName;
@@ -87,6 +93,7 @@ export default function ProtokollKopf() {
                                 </InputAdornment>
                             ),
                         }}
+                        onChange={handleDateChange}
                     />
                 </Grid>
                 <Grid item xs={12}>

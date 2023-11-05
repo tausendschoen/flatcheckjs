@@ -28,6 +28,14 @@ function EmailInput() {
         }
     }
 
+    let icon;
+    if( email === "" )
+        icon = <EmailOutlined style={{ color: 'grey' }} sx={{paddingRight: 1}} fontSize={"small"}/>;
+    else if( valid )
+        icon = <EmailOutlined style={{ color: 'green' }} sx={{paddingRight: 1}} fontSize={"small"}/>;
+    else
+        icon = <EmailOutlined style={{ color: 'red' }} sx={{paddingRight: 1}} fontSize={"small"}/>;
+
     return (
         <div>
             <TextField
@@ -40,10 +48,7 @@ function EmailInput() {
                 error={!valid}
                 helperText={!valid ? "Ungültige E-Mail-Adresse" : ""}
                 InputProps={{
-                    startAdornment: (
-                        valid ? <EmailOutlined style={{ color: 'green' }} sx={{paddingRight: 1}} /> :
-                            <EmailOutlined style={{ color: 'red' }} sx={{paddingRight: 1}}/>
-                    ),
+                    startAdornment: ( icon ),
                 }}
             />
         </div>
