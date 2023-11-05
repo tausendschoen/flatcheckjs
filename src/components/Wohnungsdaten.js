@@ -1,28 +1,17 @@
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import React from 'react';
+import React, {useContext, useState} from 'react';
 import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
 import {InputAdornment} from "@mui/material";
-import {
-    AddLocation,
-    Apartment,
-    CalendarToday,
-    Contacts,
-    Email,
-    Gradient,
-    Group,
-    Person, Phone,
-    Place
-} from "@mui/icons-material";
+import {Apartment, CalendarToday, Contacts, Group} from "@mui/icons-material";
 
 import {HeaderDispatchContext} from "./HeaderContext";
-import {useContext, useState} from "react";
-import {getCurrentDate, getCurrentDateTime} from "./helperFunctions";
-import EmailInput from "./EMailInput";
+import {getCurrentDate} from "./helperFunctions";
+import Begehungsgrund from "./Begehungsgrund";
 
 
-export default function ProtokollKopf() {
+export default function Wohnungsdaten() {
 
     const dispatch = useContext(HeaderDispatchContext);
     const [dateTime, setDateTime] = useState(getCurrentDate());
@@ -35,7 +24,7 @@ export default function ProtokollKopf() {
     };
 
     console.log("A: '" + appartmentName + "'");
-    if( appartmentName !== "")
+    if (appartmentName !== "")
         document.title = "Protokoll-" + dateTime + "-" + appartmentName;
     else
         document.title = "Protokoll-" + dateTime;
@@ -64,7 +53,9 @@ export default function ProtokollKopf() {
                         fullWidth
                         autoComplete="given-name"
                         variant="standard"
-                        onChange={(e) => {setAppartmentName(e.target.value)}}
+                        onChange={(e) => {
+                            setAppartmentName(e.target.value)
+                        }}
 
                         InputProps={{
                             startAdornment: (
@@ -114,82 +105,7 @@ export default function ProtokollKopf() {
                         }}
                     />
                 </Grid>
-
-                <Grid item xs={12}>
-                    <TextField
-                        required
-                        id="mietername"
-                        name="mietername"
-                        label="Name Mieter"
-                        fullWidth
-                        onChange={ (e) => {dispatch({action: "mieter", value: e.target.value})}}
-                        variant="standard"
-                        InputProps={{
-                            startAdornment: (
-                                <InputAdornment position="start">
-                                    <Person/>
-                                </InputAdornment>
-                            ),
-                        }}
-                    />
-                </Grid>
-
-                <Grid item xs={12}>
-                    <TextField
-                        required
-                        id="neueAdresse"
-                        name="neueAdresse"
-                        label="Neue Adresse Mieter"
-                        fullWidth
-                        variant="standard"
-                        size="small"
-                        InputProps={{
-                            startAdornment: (
-                                <InputAdornment position="start">
-                                    <AddLocation/>
-                                </InputAdornment>
-                            ),
-                        }}
-                    />
-                </Grid>
                 <Grid item xs={12} md={6}>
-                    <EmailInput
-                        required
-                        id="email_mieter"
-                        name="email_mieter"
-                        label="EMail Mieter"
-                        onChange={ (e) => {dispatch({action: "mieterEmail", value: e.target.value})}}
-                        fullWidth
-                        variant="standard"
-                        size="small"
-                        InputProps={{
-                            startAdornment: (
-                                <InputAdornment position="start">
-                                    <Email/>
-                                </InputAdornment>
-                            ),
-                        }}
-                    />
-                </Grid>
-                <Grid item xs={12} md={6}>
-                    <TextField
-                        required
-                        id="telefon"
-                        name="telefon"
-                        label="Telefon Mieter"
-                        fullWidth
-                        variant="standard"
-                        size="small"
-                        InputProps={{
-                            startAdornment: (
-                                <InputAdornment position="start">
-                                    <Phone/>
-                                </InputAdornment>
-                            ),
-                        }}
-                    />
-                </Grid>
-                <Grid item xs={12}>
                     <TextField
                         id="teilneherVermieter"
                         name="vermieter"
@@ -207,6 +123,10 @@ export default function ProtokollKopf() {
                         }}
                     />
                 </Grid>
+                <Grid item xs={12} md={6}>
+                    <Begehungsgrund/>
+                </Grid>
+
 
             </Grid>
         </Paper>

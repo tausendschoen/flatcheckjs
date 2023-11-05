@@ -4,7 +4,6 @@ import {useReducer, useRef} from "react";
 import ReactToPrint from 'react-to-print';
 import ButtonAppBar from "./components/AppBar";
 import Schluessel from "./components/Schluessel";
-import ProtokollKopf from "./components/ProtokollKopf";
 import Signature from "./components/Signature";
 import Button from "@mui/material/Button";
 import {AddCircle, PrintOutlined} from "@mui/icons-material";
@@ -19,6 +18,8 @@ import Zimmer, {
 } from "./components/Zimmer";
 import Paper from "@mui/material/Paper";
 import {copyTextToClipboard} from "./components/helperFunctions";
+import Wohnungsdaten from "./components/Wohnungsdaten";
+import MieterDaten from "./components/MieterDaten";
 
 
 export function PrintApp() {
@@ -182,7 +183,8 @@ class App extends React.PureComponent {
         return (
             <div>
                 <ButtonAppBar/>
-                <ProtokollKopf/>
+                <Wohnungsdaten/>
+                <MieterDaten/>
                 <Schluessel/>
                 {zimmerComponents}
                 <Paper

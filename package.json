@@ -1,6 +1,6 @@
 {
   "name": "wohnungsbegehung",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "homepage": "https://tausendschoen.github.io/flatcheckjs",
   "private": true,
   "dependencies": {
