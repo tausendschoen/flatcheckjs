@@ -43,7 +43,8 @@ export function PrintApp() {
                                       return <div style={{display: 'flex', alignItems: 'center', marginBottom: '10px'}}>
                                           <Button sx={{m: 2}} variant="contained" fullWidth={true}
                                                   onClick={() => {
-                                                      if (headerData.mieterEmail) copyTextToClipboard(headerData.mieterEmail)
+                                                      if (headerData.mieterEmail !== null && headerData.mieterEmail !== undefined)
+                                                          copyTextToClipboard(headerData.mieterEmail)
                                                   }}
                                                   startIcon={<PrintOutlined/>}>Drucken</Button>
                                       </div>;

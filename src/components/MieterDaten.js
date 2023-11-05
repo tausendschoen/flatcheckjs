@@ -99,7 +99,7 @@ export default function MieterDaten() {
                         }}
                     />
                 </Grid>
-                <Grid item xs={12} md={6}>
+                <Grid item xs={12} >
                     <TextField
                         id="neueAdresse"
                         name="neueAdresse"

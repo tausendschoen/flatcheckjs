@@ -23,7 +23,7 @@ export default function HelpDialog(props) {
                     <DialogContentText id="alert-dialog-description">
                         <bold>Drucken</bold><p/>
                         Um das Dokument per EMail zu versenden, wähle "Drucken" am Ende des Formulars. Dann wird
-                        ein PDF erstellt das du einfach über EMail, WhatsApp, ... versenden kannst. Das geht so:
+                        ein PDF erstellt, dass du einfach über EMail, WhatsApp, ... versenden kannst. Das geht so:
                         <ol>
                             <li>Wählen am Ende des Formulars <em>Drucken</em>. Das Dokument wird vorbereitet und die
                                 EMail Adresse des Mieters in die Zwischenablage kopiert.</li>
