@@ -6,7 +6,7 @@ import ButtonAppBar from "./components/AppBar";
 import Schluessel from "./components/Schluessel";
 import Signature from "./components/Signature";
 import Button from "@mui/material/Button";
-import {AddCircle, PrintOutlined} from "@mui/icons-material";
+import {AddCircle, EditNote, PrintOutlined} from "@mui/icons-material";
 import {dataReducer, HeaderContext, headerContextData, HeaderDispatchContext} from "./components/HeaderContext";
 import Zimmer, {
     Inventory_Abstellraum,
@@ -20,6 +20,8 @@ import Paper from "@mui/material/Paper";
 import {copyTextToClipboard} from "./components/helperFunctions";
 import Wohnungsdaten from "./components/Wohnungsdaten";
 import MieterDaten from "./components/MieterDaten";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
 
 
 export function PrintApp() {
@@ -61,14 +63,24 @@ class App extends React.PureComponent {
 
         this.state = {
             zimmerListe: [],
+            showComment: false,
+            bemerkung: ''
         };
+    }
+
+    setBemerkung = (value) => {
+        this.setState({...this.state, bemerkung: value});
     }
 
     removeZimmer = (index) => {
         console.log("removeZimmer " + index);
         const tmpListe = [...this.state.zimmerListe];
         tmpListe[index] = null;
-        this.setState({zimmerListe: tmpListe});
+        this.setState({...this.state, zimmerListe: tmpListe});
+    }
+
+    setShowComment = (value) => {
+        this.setState( {...this.state, showComment: value});
     }
 
     addZimmer = () => {
@@ -187,20 +199,21 @@ class App extends React.PureComponent {
                 <MieterDaten/>
                 <Schluessel/>
                 {zimmerComponents}
-                <Paper
-                    sx={{
-                        p: 1,
-                        m: 1,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        maxWidth: "100%",
-                        elevation: "2",
-                    }}
-                >
+                <Box sx={{m: 1, p: 1}}>
+                    <Button sx={{ marginLeft: 1 }} startIcon={<EditNote/>} variant="text" onClick={() => this.setShowComment(!this.state.showComment)}>
+                        Abschlussbemerkung
+                    </Button>
                     <Button startIcon={<AddCircle/>} variant="contained" onClick={this.addZimmer}>
                         Neues Zimmer
                     </Button>
-                </Paper>
+                </Box>
+                {this.state.showComment && (
+                <Box sx={{m: 1, p: 1}}>
+                    <TextField
+                        value={this.state.bemerkung}
+                        onChange={(e) => this.setBemerkung(e.target.value)}
+                        fullWidth multiline rows={3} label="Abschlussbemerkungen"></TextField>
+                </Box>)}
                 <Signature/>
             </div>
         );

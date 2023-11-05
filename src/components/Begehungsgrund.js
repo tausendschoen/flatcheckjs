@@ -9,7 +9,6 @@ export default function Begehungsgrund() {
         setValue(event.target.value);
     };
 
-
     return (
         <><FormControl variant="standard" fullWidth size="small">
             <InputLabel id="demo-simple-select-standard-label">Begehungsgrund</InputLabel>

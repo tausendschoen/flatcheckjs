@@ -6,6 +6,7 @@ const ImageGrid = (props) => {
 
     const images = props.images;
     const deleteImageFnc = props.deleteFunction;
+    const imagesPerRow = 3; // Anzahl der Bilder pro Zeile
 
     const gridRef = useRef(null);
 
@@ -14,7 +15,8 @@ const ImageGrid = (props) => {
         const handleResize = () => {
             const grid = gridRef.current;
             const containerWidth = grid.offsetWidth;
-            const minImageSize = 300; // Mindestplec  // const minImagesPerRow = Math.floor(containerWidth / minImageSize);
+            const imageWidth = containerWidth / imagesPerRow - 10;
+            const minImageSize = 300;
             grid.style.gridTemplateColumns = `repeat(auto-fit, minmax(${minImageSize}px, 1fr))`;
         };
 
@@ -50,18 +52,19 @@ const ImageGrid = (props) => {
                     gap: "10px",
                 }}
             >
-
                 {images.map((image, index) => (
-                    <div className={ (index+1) % 7 ? "" : "page-break"} key={index}
-                         style={{display: "flex", position: "center", justifyContent: "center"}}>
-                        <img src={image} alt={`Bild ${index}`} style={{width: "100%", margin: "10px"}}/>
+                    <div className={ (index+1) % 7 ? "" : "page-break"}
+                         key={index}
+                         style={{position: "relative", justifyContent: "center", margin: "5px"}}>
+                        <img src={image} alt={`Bild ${index}`} style={{width: "100%"}}/>
                         <button
                             onClick={() => deleteImageFnc(index)}
                             style={{
                                 position: "absolute",
-                                bottom: "10px",
+                                bottom: "12px",
                                 left: "10px",
-                                backgroundColor: "white",
+                                border: "0px",
+                                backgroundColor: 'rgba(255, 255, 255, 0.75)',
                                 padding: "5px",
                                 borderRadius: "50%",
                             }}

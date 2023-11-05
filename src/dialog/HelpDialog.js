@@ -22,17 +22,17 @@ export default function HelpDialog(props) {
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
                         <bold>Drucken</bold><p/>
-                        Sie können das Dokument nicht direkt versenden. Sie müssen es Drucken und
-                        dann über die Druckfunktion ihres Mobilgerätes "teilen". Das geht auf den
-                        iPhone / iPad wie folgt:
+                        Um das Dokument per EMail zu versenden, wähle "Drucken" am Ende des Formulars. Dann wird
+                        ein PDF erstellt das du einfach über EMail, WhatsApp, ... versenden kannst. Das geht so:
                         <ol>
-                            <li>Wählen Sie am Ende des Formulars den Knopf Drucken. Das Dokument wird dann vorbereitet und die EMail Adresse des Mieters
-                            in die Zwischenablage kopiert</li>
-                            <li>Im Drucken Dialog wählen Sie die Teilen Funktion (<IosShare/>)</li>
-                            <li>Wählen Sie die EMail App aus</li>
-                            <li>Kopieren Sie die EMail Adresse des Empfängers aus der Zwischenablage in das Empfänger Feld.</li>
-                            <li>Und jetzt noch versenden ...</li>
+                            <li>Wählen am Ende des Formulars <em>Drucken</em>. Das Dokument wird vorbereitet und die
+                                EMail Adresse des Mieters in die Zwischenablage kopiert.</li>
+                            <li>Im Drucken Dialog wähle (<IosShare/>) <em>Teilen</em>.</li>
+                            <li>Wähle deine EMail App aus.</li>
+                            <li>Klicke ins Empfänger Feld und wähle "Einfügen". Die Email Adresse des Mieters wird
+                            in das Feld kopiert.</li>
                         </ol>
+                        Jetzt kannst du das Protokoll direkt es versenden versenden.
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
