@@ -13,12 +13,10 @@ import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import WebcamDialog from "./WebcamDialog";
 import Dialog from "@mui/material/Dialog";
-import {Transition} from "react-transition-group";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogActions from "@mui/material/DialogActions";
-import AboutDialog from "../dialog/AboutDialog";
 
 
 // initialisiere Inventory
@@ -94,6 +92,7 @@ export default function Zimmer(props) {
     function removeInventory(idx) {
         let tmpInventory = [...Inventory];
         tmpInventory.splice(idx, 1);
+
         console.log(`removeInventory: ${Inventory[idx].label} Neue Liste: ` + JSON.stringify(tmpInventory));
 
         setInventory(tmpInventory);
