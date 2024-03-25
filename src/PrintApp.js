@@ -65,8 +65,9 @@ class App extends React.PureComponent {
         this.state = {
             zimmerListe: [],
             showComment: false,
-            bemerkung: ''
-        };
+            bemerkung: '',
+            open: false
+        }
     }
 
     setBemerkung = (value) => {
@@ -91,7 +92,7 @@ class App extends React.PureComponent {
                 name="XXX"
                 sonstiges={3}
                 inventory={Inventory_Keller}
-                open={this.props.open}
+                open={this.state.open}
                 idx={tmpListe.length.toString()}
                 remove={() => this.removeZimmer(tmpListe.length.toString())}
             />
@@ -141,42 +142,42 @@ class App extends React.PureComponent {
                     <Zimmer
                         name="2. Kinderzimmer"
                         inventory={Inventory_Zimmer}
-                        open={this.props.open}
+                        open={this.state.open}
                         idx="5"
                         remove={() => this.removeZimmer("5")}
                     />,
                     <Zimmer
                         name="Bad"
                         inventory={Inventory_WC}
-                        open={this.props.open}
+                        open={this.state.open}
                         idx="6"
                         remove={() => this.removeZimmer("6")}
                     />,
                     <Zimmer
                         name="Gäste WC"
                         inventory={Inventory_Gäste_WC}
-                        open={this.props.open}
+                        open={this.state.open}
                         idx="7"
                         remove={() => this.removeZimmer("7")}
                     />,
                     <Zimmer
                         name="Balkon / Loggia"
                         inventory={Inventory_Balkon}
-                        open={this.props.open}
+                        open={this.state.open}
                         idx="8"
                         remove={() => this.removeZimmer("8")}
                     />,
                     <Zimmer
                         name="Abstellraum"
                         inventory={Inventory_Abstellraum}
-                        open={this.props.open}
+                        open={this.state.open}
                         idx="9"
                         remove={() => this.removeZimmer("9")}
                     />,
                     <Zimmer
                         name="Keller"
                         inventory={Inventory_Keller}
-                        open={this.props.open}
+                        open={this.state.open}
                         idx="10"
                         remove={() => this.removeZimmer("10")}
                     />,

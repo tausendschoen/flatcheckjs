@@ -9,7 +9,7 @@ import Paper from "@mui/material/Paper";
 import IconButton from "@mui/material/IconButton";
 
 const labels = {
-    1: 'defekt', 2: 'stark gebraucht', 3: 'gebraucht', 4: 'neuwertig', 5: 'neu',
+    1: 'defekt', 2: 'stark gebraucht', 3: 'gebraucht', 4: 'gut gebraucht', 5: 'neuwertig',
 };
 
 

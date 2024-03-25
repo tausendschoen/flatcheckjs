@@ -29,6 +29,9 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
+### `npm run deploy` Used to deploy to gh-pages (git hub pages)
+You can find the deployed files at https://tausendschoen.github.io/flatcheckjs/
+
 ### `npm run eject`
 
 **Note: this is a one-way operation. Once you `eject`, you can't go back!**
@@ -69,5 +72,3 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
-### `npm run deploy` Used to deploy to gh-pages (git hub pages)
-You can find the deployed files at https://tausendschoen.github.io/flatcheckjs/

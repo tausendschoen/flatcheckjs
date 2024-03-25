@@ -5,7 +5,7 @@ import {FormControlLabel, FormGroup, InputAdornment, Switch} from "@mui/material
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Inventar from "./Inventar";
-import {AddCircle, Camera, Delete, EditNote, Gradient} from "@mui/icons-material";
+import {AddCircle, Camera, Close, Delete, EditNote, Gradient} from "@mui/icons-material";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import ImageGrid from "./ImageGrid";
@@ -51,7 +51,7 @@ export default function Zimmer(props) {
 
     const [Inventory, setInventory] = React.useState(props.inventory);
     // Darstellung des InventoryDialogs
-    const [open, setOpen] = React.useState(true);
+    const [open, setOpen] = React.useState(props.open);
     const [showComment, setShowComment] = React.useState(false);
     const [showDialog, setShowDialog] = React.useState(false);
     const [images, setImages] = useState([]);
@@ -106,6 +106,10 @@ export default function Zimmer(props) {
         setInventory(localList);
     }
 
+    function toggleVisibility() {
+        setOpen(!open);
+    }
+
     const handleCapture = (image) => {
         setImages((prevImages) => [...prevImages, image]);
     };
@@ -116,7 +120,7 @@ export default function Zimmer(props) {
         setImages(updatedImages);
     };
 
-    console.log(`Zimmer: ${props.name} Fold: ${open}  Camera Dialog: ${showDialog}`);
+    console.log(`Zimmer: ${props.name} | Fold: ${open} | Camera Dialog: ${showDialog} `);
 
     return (
         <>{showDeleteDialog && ( <AlertDialogSlide label={props.name} callBack={callBackDeleteDialog} /> ) }
@@ -132,7 +136,7 @@ export default function Zimmer(props) {
             }}>
 
             <Grid container spacing={1} paddingLeft={1} alignItems="center">
-                <Grid item xs={11}>
+                <Grid item xs={10}>
                     <div style={{display: 'flex', alignItems: 'center'}}>
                         <TextField id="zimmername" label="Zimmer"
                                    defaultValue={props.name}
@@ -142,10 +146,12 @@ export default function Zimmer(props) {
                         />
                     </div>
                 </Grid>
-                <Grid item xs={1}>
+
+                <Grid item xs={1} >
                     <IconButton sx={{marginRight: '2'}}  onClick={showDeleteRoomDialog}><Delete/></IconButton>
                 </Grid>
-                <Grid item xs={8} md={6}>
+
+                <Grid item xs={8} md={6} >
                     <TextField id="heizungszähler" label="Heizungszähler" required={true}
                                variant="standard"
                                fullWidth={true} type="text"
@@ -163,8 +169,7 @@ export default function Zimmer(props) {
                     />
                 </Grid>
                 <Grid item xs={4} md={6}>
-                    <FormGroup><FormControlLabel control={<Switch/>}
-                                                 label="Schlüssel"/></FormGroup>
+                    <FormGroup><FormControlLabel control={<Switch/>} label="Schlüssel"/></FormGroup>
                 </Grid>
                 <Grid item xs={12} sx={{p: 0, m: 0}}>
                     {Inventory.map((element) => {
@@ -200,6 +205,10 @@ export default function Zimmer(props) {
         </Paper>
         </>
     );
+}
+
+function ZimmerBewertung( props ) {
+
 
 }
 
