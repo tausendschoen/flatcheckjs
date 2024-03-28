@@ -7,7 +7,7 @@ import TextField from "@mui/material/TextField";
 import Inventar from "./Inventar";
 import {
     AddCircle,
-    Camera,
+    Camera, CheckBox,
     Delete,
     EditNote,
     Gradient,
@@ -133,7 +133,9 @@ export default function Zimmer(props) {
 
     // wenn geöffnete zeige das ganze Fenster, sonst nur den oberen Teil mit den Knöpfen
     return (
-        <>{showDeleteDialog && (<AlertDialogSlide label={props.name} callBack={callBackDeleteDialog}/>)}
+            <>
+            {open && <div className={"page-break-before"}/> }
+            {showDeleteDialog && (<AlertDialogSlide label={props.name} callBack={callBackDeleteDialog}/>)}
             <Paper
                 className={"page-break"}
                 sx={{
@@ -145,7 +147,7 @@ export default function Zimmer(props) {
                     elevation: "2",
                 }}>
 
-                <Grid container spacing={1} paddingLeft={1} alignItems="center" >
+                <Grid container  alignItems="center" >
                     <Grid item xs={10} >
                         <div style={{display: 'flex', alignItems: 'center'}}>
                             <TextField id="zimmername" label="Zimmer" disabled={!open}
@@ -158,15 +160,15 @@ export default function Zimmer(props) {
                     </Grid>
 
                     <Grid item xs={1} >
-                        <IconButton sx={{marginRight: '2'}} onClick={showDeleteRoomDialog}><Delete/></IconButton>
+                        <IconButton onClick={showDeleteRoomDialog}><Delete/></IconButton>
                     </Grid>
 
                     <Grid item xs={1} >
-                        <IconButton sx={{marginRight: '2'}} onClick={toggleVisibility}>{open ? <MenuIcon/> : <MenuOpen/>} </IconButton>
+                        <IconButton sx={{paddingRight: '5px'}} onClick={toggleVisibility}>{open ? <MenuIcon/> : <MenuOpen/>} </IconButton>
                     </Grid>
 
                     {open && <>
-                        <Grid item xs={10} md={6}>
+                        <Grid item xs={6} md={6} sx={{paddingTop: '5px'}}>
                             <TextField id="heizungszähler" label="Heizungszähler" required={true}
                                        variant="standard"
 
@@ -185,8 +187,11 @@ export default function Zimmer(props) {
                             />
                         </Grid>
 
-                        <Grid item xs={2} md={6}>
-                            <FormGroup><FormControlLabel control={<Switch/>} label="Schlüssel"/></FormGroup>
+                        <Grid item xs={1} md={1}>
+                        </Grid>
+
+                        <Grid item xs={5} md={5}>
+                            <FormGroup><FormControlLabel control={<CheckBox color="primary"/>} label="Zimmerschlüssel"/></FormGroup>
                         </Grid>
 
                         <Grid item xs={12} sx={{p: 0, m: 0}} >

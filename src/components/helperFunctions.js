@@ -8,6 +8,15 @@ export function getCurrentDateTime() {
     return `${year}-${month}-${day}T${hours}:${minutes}`;
 }
 
+export function getWindowDimensions() {
+    const { innerWidth: width, innerHeight: height } = window;
+    return {
+        width,
+        height
+    };
+}
+
+
 export function getCurrentDate() {
     const currentDateTime = new Date();
     const year = currentDateTime.getFullYear();

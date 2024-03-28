@@ -4,24 +4,30 @@ import IconButton from "@mui/material/IconButton";
 import {DeleteOutline} from "@mui/icons-material";
 import Typography from "@mui/material/Typography";
 import SignatureCanvas from "react-signature-canvas";
+import {useMediaQuery} from "@mui/material";
+
 
 
 export default function SignatureBox(props) {
 
     const sigRef = useRef();
-    // const [signature, setSignature] = useState(null);
+    const isPrinter = useMediaQuery("print");
+
+    let signatureWidth = 300;
+    let signatureHeight = 175;
+
+    console.log(`Printer ${isPrinter}`);
 
     const handleSignatureEnd = () => {
         //setSignature(sigRef.current.toDataURL());
     }
     const clearSignature = () => {
         sigRef.current.clear();
-        // setSignature(null);
     }
 
     return (
 
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', margin: "10px" }}>
+        <div className={"signature-box"} >
             <Paper sx={{
                 background: '#EEE',
                 p: 1,
@@ -35,8 +41,8 @@ export default function SignatureBox(props) {
                     penColor="black"
                     ref={sigRef}
                     throttle={1}
-                    clearOnResize={true}
-                    canvasProps={{ width: 400, height: 250, className: 'sigCanvas' }}
+                    clearOnResize={false}
+                    canvasProps={{ width: signatureWidth, height: signatureHeight }}
                     onEnd={handleSignatureEnd}
                 />
             </Paper>

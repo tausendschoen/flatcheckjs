@@ -9,13 +9,11 @@ export default function Signature() {
 
     return (
 
-        <div className={"page-break"} style={{display: 'flex', alignItems: 'center',
+        <div className={"page-break-before"} style={{display: 'flex', alignItems: 'center',
             flexWrap: 'wrap',
             justifyContent: 'center', margin: "10px"}}>
-
             <SignatureBox id={1} title={"Unterschrift Mieter " + headerContextData.mieter}/>
             <SignatureBox id={2} title={"Unterschrift Vermieter " + headerContextData.vermieter}/>
-
         </div>
 
     )

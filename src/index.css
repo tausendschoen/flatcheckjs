@@ -13,11 +13,17 @@ code {
 }
 
 @media print {
-   .page-break {
+   .page-break-before {
       margin-top: 2rem;
       display: block;
       page-break-before: always;
-
   }
+    .page-break-after {
+        margin-top: 2rem;
+        display: block;
+        page-break-after: always;
+    }
+
 }
+
 

@@ -8,6 +8,15 @@
   }
 }
 
+signature-box {
+  display: flex;
+  flexDirection: column;
+  alignItems: center;
+  justifyContent: center;
+  margin: 10px;
+}
+
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;

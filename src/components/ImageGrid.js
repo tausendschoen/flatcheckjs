@@ -34,7 +34,7 @@ const ImageGrid = (props) => {
         <>
             {images.length > 0 && (
                 <div
-                    className={"page-break"}
+                    className={"page-break-before"}
                     style={{
                     display: 'flex',
                     flexDirection: 'column',
@@ -54,7 +54,6 @@ const ImageGrid = (props) => {
                     gap: "10px",
                 }}
             >
-
                 {images.map((image, index) => (
                     <div key={index}
                          style={{position: "relative", justifyContent: "center", margin: "5px"}}>
@@ -76,6 +75,16 @@ const ImageGrid = (props) => {
                     </div>
                 ))}
             </div>
+
+            <div
+                className={"page-break-after"}
+                style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    margin: "0px"
+                }}/>
         </>
     );
 };
