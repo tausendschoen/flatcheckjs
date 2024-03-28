@@ -1,7 +1,7 @@
 import * as React from "react";
 import {useState} from "react";
 
-import {FormControlLabel, FormGroup, InputAdornment, Menu, Switch} from "@mui/material";
+import {FormControlLabel, FormGroup, InputAdornment, Switch} from "@mui/material";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Inventar from "./Inventar";
@@ -10,10 +10,7 @@ import {
     Camera,
     Delete,
     EditNote,
-    ExpandCircleDown,
     Gradient,
-    HideImage,
-    Image,
     MenuOpen
 } from "@mui/icons-material";
 import Grid from "@mui/material/Grid";
@@ -230,11 +227,6 @@ export default function Zimmer(props) {
             </Paper>
         </>
     );
-}
-
-function ZimmerBewertung(props) {
-
-
 }
 
 function AlertDialogSlide(props) {

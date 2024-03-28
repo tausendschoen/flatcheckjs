@@ -1,9 +1,21 @@
 Als nächstes zu tun:
 -------------------------------------------
-TODO
-Das Suchefeld im Inventar sollte durch ein Textfeld ersetzt werden. Das Textfeld ist
-änderbar wenn "Sonstiges" ausgewählt wird. Ansonsten ist der Text im dem Feld "readonly".
 
-Dann braucht es einen Dialog in dem man die Optionen auswählen kann. Aus einer Liste von
-Elementen kann man ein oder mehrere Elemente auswählen "Tür, Türzarge, ..." und alle
-diese Elemente werden erstellt.
+Layout / Media Druck
++ 4 Bilder auf eine Dina A4 Seite packen
++ Kleinere Abstände
++ Kleinere Schriftart
+
+Zimmer
+* Markieren, dass ein Zimmer fertig ist
+* Wenn es markiert ist, dann erst das Drucken starten, wenn alle Zimmer fertig markiert sind
+
+Drucken
++ Vor dem Drucken müssen alle Zimmer aufgeklappt werden
+
+
+-----------------------------------------------------------------------------------------------------------------------
+
+Erledigt:
+
+Zimmer kann auf und zugeklappt werden
