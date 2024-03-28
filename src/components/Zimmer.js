@@ -1,11 +1,21 @@
 import * as React from "react";
 import {useState} from "react";
 
-import {FormControlLabel, FormGroup, InputAdornment, Switch} from "@mui/material";
+import {FormControlLabel, FormGroup, InputAdornment, Menu, Switch} from "@mui/material";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Inventar from "./Inventar";
-import {AddCircle, Camera, Close, Delete, EditNote, Gradient} from "@mui/icons-material";
+import {
+    AddCircle,
+    Camera,
+    Delete,
+    EditNote,
+    ExpandCircleDown,
+    Gradient,
+    HideImage,
+    Image,
+    MenuOpen
+} from "@mui/icons-material";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import ImageGrid from "./ImageGrid";
@@ -17,6 +27,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogActions from "@mui/material/DialogActions";
+import MenuIcon from "@mui/icons-material/Menu";
 
 
 // initialisiere Inventory
@@ -122,92 +133,106 @@ export default function Zimmer(props) {
 
     console.log(`Zimmer: ${props.name} | Fold: ${open} | Camera Dialog: ${showDialog} `);
 
+
+    // wenn geöffnete zeige das ganze Fenster, sonst nur den oberen Teil mit den Knöpfen
     return (
-        <>{showDeleteDialog && ( <AlertDialogSlide label={props.name} callBack={callBackDeleteDialog} /> ) }
-        <Paper
-            className={"page-break"}
-            sx={{
-                p: 1,
-                m: 1,
-                display: 'flex',
-                flexDirection: 'column',
-                maxWidth: "100%",
-                elevation: "2",
-            }}>
+        <>{showDeleteDialog && (<AlertDialogSlide label={props.name} callBack={callBackDeleteDialog}/>)}
+            <Paper
+                className={"page-break"}
+                sx={{
+                    p: 1,
+                    m: 1,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    maxWidth: "100%",
+                    elevation: "2",
+                }}>
 
-            <Grid container spacing={1} paddingLeft={1} alignItems="center">
-                <Grid item xs={10}>
-                    <div style={{display: 'flex', alignItems: 'center'}}>
-                        <TextField id="zimmername" label="Zimmer"
-                                   defaultValue={props.name}
-                                   required={true}
-                                   fullWidth={true} type="text"
-                                   variant="standard"
-                        />
-                    </div>
-                </Grid>
+                <Grid container spacing={1} paddingLeft={1} alignItems="center" >
+                    <Grid item xs={10} >
+                        <div style={{display: 'flex', alignItems: 'center'}}>
+                            <TextField id="zimmername" label="Zimmer" disabled={!open}
+                                       defaultValue={props.name}
+                                       required={true}
+                                       fullWidth={true} type="text"
+                                       variant="standard"
+                            />
+                        </div>
+                    </Grid>
 
-                <Grid item xs={1} >
-                    <IconButton sx={{marginRight: '2'}}  onClick={showDeleteRoomDialog}><Delete/></IconButton>
-                </Grid>
+                    <Grid item xs={1} >
+                        <IconButton sx={{marginRight: '2'}} onClick={showDeleteRoomDialog}><Delete/></IconButton>
+                    </Grid>
 
-                <Grid item xs={8} md={6} >
-                    <TextField id="heizungszähler" label="Heizungszähler" required={true}
-                               variant="standard"
-                               fullWidth={true} type="text"
-                               InputLabelProps={{
-                                   shrink: true,
-                               }}
-                               size="small"
-                               InputProps={{
-                                   startAdornment: (
-                                       <InputAdornment position="start">
-                                           <Gradient/>
-                                       </InputAdornment>
-                                   ),
-                               }}
-                    />
-                </Grid>
-                <Grid item xs={4} md={6}>
-                    <FormGroup><FormControlLabel control={<Switch/>} label="Schlüssel"/></FormGroup>
-                </Grid>
-                <Grid item xs={12} sx={{p: 0, m: 0}}>
-                    {Inventory.map((element) => {
-                        return (<Inventar key={element.idx} idx={element.idx} label={element.label}
-                                          set={setInventoryValue}
-                                          removeFnc={removeInventory} checkFunction={containsInventory}/>)
-                    })
+                    <Grid item xs={1} >
+                        <IconButton sx={{marginRight: '2'}} onClick={toggleVisibility}>{open ? <MenuIcon/> : <MenuOpen/>} </IconButton>
+                    </Grid>
+
+                    {open && <>
+                        <Grid item xs={10} md={6}>
+                            <TextField id="heizungszähler" label="Heizungszähler" required={true}
+                                       variant="standard"
+
+                                       fullWidth={true} type="text"
+                                       InputLabelProps={{
+                                           shrink: true,
+                                       }}
+                                       size="small"
+                                       InputProps={{
+                                           startAdornment: (
+                                               <InputAdornment position="start">
+                                                   <Gradient/>
+                                               </InputAdornment>
+                                           ),
+                                       }}
+                            />
+                        </Grid>
+
+                        <Grid item xs={2} md={6}>
+                            <FormGroup><FormControlLabel control={<Switch/>} label="Schlüssel"/></FormGroup>
+                        </Grid>
+
+                        <Grid item xs={12} sx={{p: 0, m: 0}} >
+                            {Inventory.map((element) => {
+                                return (<Inventar key={element.idx} idx={element.idx} label={element.label}
+                                                  set={setInventoryValue}
+                                                  removeFnc={removeInventory} checkFunction={containsInventory}/>)
+                            })
+                            }
+                        </Grid>
+                    </>
                     }
                 </Grid>
-            </Grid>
 
-            <Box sx={{m: 1}}>
-                <Button startIcon={<AddCircle/>} sx={{marginRight: 1}}
-                        onClick={addInventory}>
-                    Inventar
-                </Button>
-                <Button startIcon={<EditNote/>} sx={{marginRight: 1}}
-                        onClick={() => setShowComment(!showComment)}>
-                    Hinweise
-                </Button>
-                <Button onClick={() => {
-                    setShowDialog(true)
-                }}
-                        startIcon={<Camera/>}> Fotos </Button>
-            </Box>
-            <Box sx={{m: 1}}>
-                {showComment && (<TextField fullWidth multiline rows={3} label="Hinweistext"></TextField>)}
-            </Box>
+                {open && <>
+                    <Box sx={{m: 1}}>
+                        <Button startIcon={<AddCircle/>} sx={{marginRight: 1}}
+                                onClick={addInventory}>
+                            Inventar
+                        </Button>
+                        <Button startIcon={<EditNote/>} sx={{marginRight: 1}}
+                                onClick={() => setShowComment(!showComment)}>
+                            Hinweise
+                        </Button>
+                        <Button onClick={() => {
+                            setShowDialog(true)
+                        }}
+                                startIcon={<Camera/>}> Fotos </Button>
+                    </Box>
+                    <Box sx={{m: 1}}>
+                        {showComment && (<TextField fullWidth multiline rows={3} label="Hinweistext"></TextField>)}
+                    </Box>
 
-            {showDialog && (<WebcamDialog onClose={() => setShowDialog(false)} onCapture={handleCapture}/>)}
-            {Boolean(images) && (<ImageGrid title={props.name} images={images} deleteFunction={deleteImage}/>)}
-
-        </Paper>
+                    {showDialog && (<WebcamDialog onClose={() => setShowDialog(false)} onCapture={handleCapture}/>)}
+                    {Boolean(images) && (<ImageGrid title={props.name} images={images} deleteFunction={deleteImage}/>)}
+                </>
+                }
+            </Paper>
         </>
     );
 }
 
-function ZimmerBewertung( props ) {
+function ZimmerBewertung(props) {
 
 
 }
@@ -219,7 +244,7 @@ function AlertDialogSlide(props) {
             <Dialog
                 open={true}
                 keepMounted
-                onClose={() => props.callBack(props.index ,false)}
+                onClose={() => props.callBack(props.index, false)}
                 aria-describedby="alert-dialog-slide-description"
             >
                 <DialogTitle>{"Löschen eines Zimmers?"}</DialogTitle>
@@ -229,8 +254,9 @@ function AlertDialogSlide(props) {
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button variant={"contained"} onClick={() => props.callBack(props.index ,false)}>Nein</Button>
-                    <Button variant={"contained"} color={"error"} onClick={() => props.callBack(props.index, true)}>Ja</Button>
+                    <Button variant={"contained"} onClick={() => props.callBack(props.index, false)}>Nein</Button>
+                    <Button variant={"contained"} color={"error"}
+                            onClick={() => props.callBack(props.index, true)}>Ja</Button>
                 </DialogActions>
             </Dialog>
         </React.Fragment>
