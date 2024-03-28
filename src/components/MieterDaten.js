@@ -6,22 +6,13 @@ import Paper from '@mui/material/Paper';
 import {InputAdornment} from "@mui/material";
 import {
     AddLocation,
-    Apartment,
-    CalendarToday,
-    Contacts,
     Email,
-    Gradient,
-    Group,
     Person, Phone,
-    Place
 } from "@mui/icons-material";
 
 import {HeaderDispatchContext} from "./HeaderContext";
 import {useContext, useState} from "react";
-import {getCurrentDate, getCurrentDateTime} from "./helperFunctions";
 import EmailInput from "./EMailInput";
-import Begehungsgrund from "./Begehungsgrund";
-
 
 export default function MieterDaten() {
 

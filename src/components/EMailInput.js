@@ -1,7 +1,5 @@
 import React, { useContext, useState } from 'react';
 import TextField from '@mui/material/TextField';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import CancelIcon from '@mui/icons-material/Cancel';
 import { HeaderDispatchContext } from "./HeaderContext";
 import {EmailOutlined} from "@mui/icons-material";
 

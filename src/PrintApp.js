@@ -16,7 +16,7 @@ import Zimmer, {
     Inventory_WC,
     Inventory_Zimmer
 } from "./components/Zimmer";
-import Paper from "@mui/material/Paper";
+
 import {copyTextToClipboard} from "./components/helperFunctions";
 import Wohnungsdaten from "./components/Wohnungsdaten";
 import MieterDaten from "./components/MieterDaten";

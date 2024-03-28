@@ -6,7 +6,6 @@ import Typography from '@mui/material/Typography';
 import IconButton from "@mui/material/IconButton";
 import {Menu, MenuItem} from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
-import {AppVersion} from "./appVersion";
 import AboutDialog from "../dialog/AboutDialog";
 import HelpDialog from "../dialog/HelpDialog";
 
