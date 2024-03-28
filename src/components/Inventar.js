@@ -8,7 +8,7 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 
 const labels = {
-    1: 'defekt', 2: 'stark gebraucht', 3: 'gebraucht', 4: 'gut gebraucht', 5: 'neuwertig',
+   1: 'defekt', 2: 'stark gebraucht', 3: 'gebraucht', 4: 'gut gebraucht', 5: 'neuwertig',
 };
 
 
@@ -66,13 +66,10 @@ export default function Inventar(props) {
         checkLabel(label);
     };
 
-    function getLabelText() {
-        return (Boolean(label) && value) ? `${label} (${labels[value]})` : label;
-    }
 
     return (
-            <Grid container spacing={1} sx={{paddingTop: 1}} color={"black"} borderColor={'primary.main'}>
-                <Grid iten xs={12} sm={6}>
+            <Grid container spacing={1} sx={{paddingTop: 1}} color={"black"} borderColor={'primary.main'} >
+                <Grid iten xs={12} sm={8} >
                     <div style={{ display: 'flex', alignItems: 'center', paddingLeft: '0px' }}>
                     <IconButton aria-label="delete" color="primary" onClick={() => props.removeFnc(props.idx)}>
                         <Delete/>
@@ -91,8 +88,8 @@ export default function Inventar(props) {
                     </div>
                 </Grid>
 
-                <Grid item xs={12} sm={4} >
-                    <div style={{ display: 'flex', alignItems: 'center', paddingLeft: '0px' }}>
+                <Grid item xs={12} sm={4} justifyItems="flex-end">
+                    <div style={{ display: 'flex', alignItems: 'right', paddingLeft: '0px' }}>
                     <Rating
                         name="hover-feedback"
                         value={value}

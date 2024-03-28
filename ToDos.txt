@@ -2,9 +2,10 @@ Als nächstes zu tun:
 -------------------------------------------
 
 Layout / Media Druck
-+ 4 Bilder auf eine Dina A4 Seite packen
++ 4 Bilder auf eine DIN A4 Seite packen
 + Kleinere Abstände
 + Kleinere Schriftart
+
 
 Zimmer
 * Markieren, dass ein Zimmer fertig ist
@@ -18,4 +19,7 @@ Drucken
 
 Erledigt:
 
-Zimmer kann auf und zugeklappt werden
++ Zimmer kann auf und zugeklappt werden
+
++ Das nutzt nicht die ganze Breite aus: Doch tut es. Es fehlt nur die Schrift wenn das Inventnar noch nich
+  bewertet wurde. Dann sieht es so aus als wenn der Platz fehlt
